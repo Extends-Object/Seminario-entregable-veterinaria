@@ -15,5 +15,8 @@ public class Veterinaria {
 		this.codArea = codArea;
 		this.numeroTel = numeroTel;
 	}
-
+	
+	public void mostrarContacto () {
+		
+	}
 }

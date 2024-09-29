@@ -1,19 +1,24 @@
 package ar.edu.unrn.seminario.modelo;
 
 public class Usuario {
+	private String nombre;
+	private String apellido;
+	private String email;
+	
+	
 	private String usuario;
 	private String contrasena;
-	private String nombre;
-	private String email;
 	private Rol rol;
 	private boolean activo;
 
-	public Usuario(String usuario, String contrasena, String nombre, String email, Rol rol) {
+	public Usuario(String nombre, String apellido, String email, String usuario, String contrasena, Rol rol) {
 
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		
 		this.usuario = usuario;
 		this.contrasena = contrasena;
-		this.nombre = nombre;
-		this.email = email;
 		this.rol = rol;
 	}
 
@@ -56,6 +61,8 @@ public class Usuario {
 	public void setRol(Rol rol) {
 		this.rol = rol;
 	}
+	
+	//-----------------------------------------------
 
 	public boolean isActivo() {
 		return activo;

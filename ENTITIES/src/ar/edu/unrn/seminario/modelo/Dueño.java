@@ -15,4 +15,18 @@ public class Dueño {
 		this.email = email;
 		this.direccion = direccion;
 	}
+	
+	
+	public void agregarAnimal(Animal animal) {
+		
+	}
+	
+	public void eliminarAnimal(Animal animal) {
+		
+	}
+	
+	public Animal buscarAnimal (String nombre) {
+		
+		return a;
+	}
 }

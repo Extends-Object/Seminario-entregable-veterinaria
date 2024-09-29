@@ -5,7 +5,7 @@ public class Droga {
 	String nombreGenerico;
 	String nombreComercial;
 	String principioActivo;
-	String viaAdministracion;
+	String viaAdministracion; //intramuscular, subcutanea, oral
 	int frecuenciaSuministroHS;
 	
 	public Droga(String nombreGenerico, String nombreComercial, String principioActivo, String viaAdministracion, int frecuenciaSuministroHS) {
@@ -16,8 +16,8 @@ public class Droga {
 		this.frecuenciaSuministroHS = frecuenciaSuministroHS;
 	}
 	
-	public mostrarInformacionDroga () {
-		System.out.println();
+	public void mostrarInformacionDroga () {
+		
 	}
 	
 }

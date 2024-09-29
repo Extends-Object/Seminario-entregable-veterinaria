@@ -41,5 +41,9 @@ public class Animal {
 		return edad;
 	}
 	
+	public void agregarVacuna (Vacuna vacuna) {
+		
+	}
+	
 	
 }

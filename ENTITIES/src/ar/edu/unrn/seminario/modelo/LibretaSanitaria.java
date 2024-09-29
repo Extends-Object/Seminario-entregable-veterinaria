@@ -9,4 +9,13 @@ public class LibretaSanitaria {
 	public LibretaSanitaria(ArrayList<Vacuna> listaVacunas) {
 		this.listaVacunas = listaVacunas;
 	}
+	
+	public void agregarVaguna (Vacuna vacuna) {
+		
+	}
+	
+	public boolean fueAplicada (Vacuna vacuna) {
+		return aplicada;
+	}
+	
 }
