@@ -2,6 +2,7 @@ package ar.edu.unrn.seminario.modelo;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 
 public class Animal {
 	String nombre;
@@ -15,7 +16,6 @@ public class Animal {
 	LibretaSanitaria libretaSanitaria;
 	String caractParticulares;
 	
-	//CONSTRUCTORES
 	public Animal(String nombre, String especie, Raza raza, LocalDate fechaNac, float peso, String sexo, boolean estaCastrado, String caractParticulares) {
 		this.nombre = nombre;
 		this.especie = especie;
@@ -25,6 +25,7 @@ public class Animal {
 		this.sexo = sexo;
 		this.estaCastrado = estaCastrado;
 		this.caractParticulares = caractParticulares;
+		this.libretaSanitaria = new LibretaSanitaria( );
 		calcularEdad();
 	}
 	
