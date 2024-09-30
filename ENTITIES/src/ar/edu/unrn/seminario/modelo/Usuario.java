@@ -6,12 +6,12 @@ public class Usuario {
 	private String email;
 	
 	
-	private String usuario;
-	private String contrasena;
-	private Rol rol;
-	private boolean activo;
+	//private String usuario;
+	//private String contrasena;
+	//private Rol rol;
+	//private boolean activo;
 
-	public Usuario(String nombre, String apellido, String email, String usuario, String contrasena, Rol rol) {
+	/*public Usuario(String nombre, String apellido, String email, String usuario, String contrasena, Rol rol) {
 
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -20,8 +20,18 @@ public class Usuario {
 		this.usuario = usuario;
 		this.contrasena = contrasena;
 		this.rol = rol;
-	}
+	}*/
+	//-------------------------------------------------------------
+	
+	public Usuario(String nombre, String apellido, String email) {
 
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+	}
+	
+	//--------------------------------------------------------------
+	/*
 	public String getUsuario() {
 		return usuario;
 	}
@@ -37,13 +47,22 @@ public class Usuario {
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
 	}
-
+	*/
+	
 	public String getNombre() {
 		return nombre;
 	}
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
 	public String getEmail() {
@@ -53,7 +72,8 @@ public class Usuario {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
+	/*
 	public Rol getRol() {
 		return rol;
 	}
@@ -61,9 +81,9 @@ public class Usuario {
 	public void setRol(Rol rol) {
 		this.rol = rol;
 	}
-	
+	*/
 	//-----------------------------------------------
-
+	/*
 	public boolean isActivo() {
 		return activo;
 	}
@@ -106,5 +126,5 @@ public class Usuario {
 			return false;
 		return true;
 	}
-
+	*/
 }

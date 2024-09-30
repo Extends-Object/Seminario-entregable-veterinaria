@@ -2,7 +2,6 @@ package ar.edu.unrn.seminario.modelo;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
 
 public class Animal {
 	String nombre;
@@ -122,8 +121,5 @@ public class Animal {
 	public void setCaractParticulares(String caractParticulares) {
 		this.caractParticulares = caractParticulares;
 	}
-	
-	
-	
 	
 }

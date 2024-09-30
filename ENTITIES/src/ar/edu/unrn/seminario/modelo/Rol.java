@@ -5,18 +5,31 @@ public class Rol extends Usuario{
 	//private String nombre;
 	//private boolean activo;
 
-	public Rol() {
-
-	}
-
-	public Rol(Integer codigo, String nombre) {
-		super();
-		this.codigo = codigo;
-		this.nombre = nombre;
+	public Rol(String nombre, String apellido, String email) {
+		super(nombre, apellido, email);
 	}
 	
+	/*public RolDTO toDTO() {
+        return new RolDTO(getNombre(), getApellido(), getEmail(), nombreRol, activo);
+    }
 
-	public Integer getCodigo() {
+    public static Rol fromDTO(RolDTO rolDTO) {
+        Rol rol = new Rol(rolDTO.getNombre(), rolDTO.getApellido(), rolDTO.getEmail(), rolDTO.getNombreRol());
+        if (rolDTO.isActivo()) {
+            rol.activar();
+        } else {
+            rol.desactivar();
+        }
+        return rol;
+    }*/
+
+	//public Rol(Integer codigo, String nombre) {
+	//	this.codigo = codigo;
+	//	this.nombre = nombre;
+	//}
+	
+
+	/*public Integer getCodigo() {
 		return codigo;
 	}
 
@@ -77,5 +90,5 @@ public class Rol extends Usuario{
 	public String toString() {
 		return "Rol [codigo=" + codigo + ", nombre=" + nombre + ", activo=" + activo + "]";
 	}
-
+*/
 }

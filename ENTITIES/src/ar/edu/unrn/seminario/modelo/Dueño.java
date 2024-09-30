@@ -2,7 +2,7 @@ package ar.edu.unrn.seminario.modelo;
 
 import java.util.ArrayList;
 
-public class Dueño {
+public class Dueño extends Rol{
 	private String nombre;
 	private String apellido;
 	private String email;
@@ -10,9 +10,7 @@ public class Dueño {
 	private String direccion;
 	
 	public Dueño (String nombre, String apellido, String email, String direccion) {
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.email = email;
+		super(nombre, apellido, email);
 		this.direccion = direccion;
 	}
 	
@@ -32,7 +30,7 @@ public class Dueño {
 	
 	public Animal buscarAnimal (String nombre) {
 		for (Animal animal : listaAnimales) {
-            if (animal.getNombre().equals(nombre)) {
+            if (animal.getNombre().equalsIgnoreCase(nombre)) {
                 return animal;
             }
         }
@@ -40,7 +38,11 @@ public class Dueño {
         return null;
 	}
 
-
+	public ArrayList <Animal> listarAnimales () {
+		return this.listaAnimales;
+	}
+	
+	//--------------------------------------------------------
 	public String getNombre() {
 		return nombre;
 	}
