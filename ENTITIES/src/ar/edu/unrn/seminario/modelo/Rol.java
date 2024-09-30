@@ -1,9 +1,9 @@
 package ar.edu.unrn.seminario.modelo;
 
 public class Rol extends Usuario{
-	private Integer codigo;
-	private String nombre;
-	private boolean activo;
+	//private Integer codigo;
+	//private String nombre;
+	//private boolean activo;
 
 	public Rol() {
 

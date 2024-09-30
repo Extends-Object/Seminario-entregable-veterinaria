@@ -16,7 +16,32 @@ public class Veterinaria {
 		this.numeroTel = numeroTel;
 	}
 	
-	public void mostrarContacto () {
-		
+	public void mostrarContacto() {
+        System.out.println("Dirección: " + direccion);
+        System.out.println("Teléfono: (" + codArea + ") " + numeroTel);
+    }
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public int getCodArea() {
+		return codArea;
+	}
+
+	public void setCodArea(int codArea) {
+		this.codArea = codArea;
+	}
+
+	public int getNumeroTel() {
+		return numeroTel;
+	}
+
+	public void setNumeroTel(int numeroTel) {
+		this.numeroTel = numeroTel;
 	}
 }

@@ -18,15 +18,77 @@ public class Dueño {
 	
 	
 	public void agregarAnimal(Animal animal) {
-		
+		listaAnimales.add(animal);
+		System.out.println("Animal agregado: " + animal.getNombre());
 	}
 	
 	public void eliminarAnimal(Animal animal) {
-		
+		if (listaAnimales.remove(animal)) {
+            System.out.println("Animal eliminado");
+        } else {
+            System.out.println("El animal no se encontró en la lista");
+        }
 	}
 	
 	public Animal buscarAnimal (String nombre) {
-		
-		return a;
+		for (Animal animal : listaAnimales) {
+            if (animal.getNombre().equals(nombre)) {
+                return animal;
+            }
+        }
+        System.out.println("Animal no encontrado");
+        return null;
 	}
+
+
+	public String getNombre() {
+		return nombre;
+	}
+
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+
+	public String getApellido() {
+		return apellido;
+	}
+
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public ArrayList<Animal> getListaAnimales() {
+		return listaAnimales;
+	}
+
+
+	public void setListaAnimales(ArrayList<Animal> listaAnimales) {
+		this.listaAnimales = listaAnimales;
+	}
+
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+	
+	
 }

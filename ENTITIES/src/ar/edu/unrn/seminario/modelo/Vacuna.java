@@ -26,24 +26,104 @@ public class Vacuna {
 		this.esquema = esquema;
 		this.proximaDosis = proximaDosis;
 		this.observaciones = observaciones;
-		//this.numeroDosisActual = 0;
+		this.numeroDosisActual = 0;
 	}
 	
 	public int consultarDosisFaltantes() 
 	{
-		int dosisFaltantes;
-		dosisFaltantes = numeroDosisTotal - numeroDosisActual;
-		return dosisFaltantes;
+		return numeroDosisTotal - numeroDosisActual;
 	}
 	
 	public void registrarNuevaDosis() 
 	{
-		this.numeroDosisActual++;
+		if (numeroDosisActual < numeroDosisTotal) {
+            this.numeroDosisActual++;
+            System.out.println("Dosis actual: " + numeroDosisActual);
+        }
 	}
 	
-	public boolean necesitaRefuerzo() {
+	/*public boolean necesitaRefuerzo() {
 		//consultar esquema
 		return necesita;
+	}*/
+
+	public LocalDate getFechaAplicacion() {
+		return fechaAplicacion;
 	}
-	
+
+	public void setFechaAplicacion(LocalDate fechaAplicacion) {
+		this.fechaAplicacion = fechaAplicacion;
+	}
+
+	public int getNumeroDosisTotal() {
+		return numeroDosisTotal;
+	}
+
+	public void setNumeroDosisTotal(int numeroDosisTotal) {
+		this.numeroDosisTotal = numeroDosisTotal;
+	}
+
+	public int getNumeroDosisActual() {
+		return numeroDosisActual;
+	}
+
+	public void setNumeroDosisActual(int numeroDosisActual) {
+		this.numeroDosisActual = numeroDosisActual;
+	}
+
+	public Droga getDroga() {
+		return droga;
+	}
+
+	public void setDroga(Droga droga) {
+		this.droga = droga;
+	}
+
+	public String getLote() {
+		return lote;
+	}
+
+	public void setLote(String lote) {
+		this.lote = lote;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public float getCantidadSuministrada() {
+		return cantidadSuministrada;
+	}
+
+	public void setCantidadSuministrada(float cantidadSuministrada) {
+		this.cantidadSuministrada = cantidadSuministrada;
+	}
+
+	public String getEsquema() {
+		return esquema;
+	}
+
+	public void setEsquema(String esquema) {
+		this.esquema = esquema;
+	}
+
+	public LocalDate getProximaDosis() {
+		return proximaDosis;
+	}
+
+	public void setProximaDosis(LocalDate proximaDosis) {
+		this.proximaDosis = proximaDosis;
+	}
+
+	public String getObservaciones() {
+		return observaciones;
+	}
+
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
+	}
 }
