@@ -1,33 +1,14 @@
 package ar.edu.unrn.seminario.api;
 
-import java.util.List;
+import java.time.LocalDate;
 
-import ar.edu.unrn.seminario.dto.RolDTO;
-import ar.edu.unrn.seminario.dto.UsuarioDTO;
+import ar.edu.unrn.seminario.exception.AnimalExistsInArrayException;
 
 public interface IApi {
-
-	void registrarUsuario(String username, String password, String email, String nombre, Integer rol);
-
-	UsuarioDTO obtenerUsuario(String username);
-
-	void eliminarUsuario(String username);
-
-	List<RolDTO> obtenerRoles();
-
-	List<RolDTO> obtenerRolesActivos();
-
-	void guardarRol(Integer codigo, String descripcion, boolean estado); // crear el objeto de dominio �Rol�
-
-	RolDTO obtenerRolPorCodigo(Integer codigo); // recuperar el rol almacenado
-
-	void activarRol(Integer codigo); // recuperar el objeto Rol, implementar el comportamiento de estado.
-
-	void desactivarRol(Integer codigo); // recuperar el objeto Rol, imp
-
-	List<UsuarioDTO> obtenerUsuarios(); // recuperar todos los usuarios
-
-	void activarUsuario(String username); // recuperar el objeto Usuario, implementar el comportamiento de estado.
-
-	void desactivarUsuario(String username); // recuperar el objeto Usuario, implementar el comportamiento de estado.
+	
+	public void agregarAnimal(String nombre, String especie, String tamaño, String raza, LocalDate fechaNac, int edad, float peso, String sexo, boolean estaCastrado, String caractParticulares, int iD) throws AnimalExistsInArrayException;
+	
+	public void borrarAnimal(int iD);
+	
+	public void modificarAnimal(int iD, String nombre, int edad, float peso, boolean estaCastrado, String caractParticulares);
 }

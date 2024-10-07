@@ -6,15 +6,21 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import ar.edu.unrn.seminario.api.AplicacionAPI;
+import ar.edu.unrn.seminario.dto.AnimalDTO;
 
-import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.JRadioButton;
+import java.awt.Font;
+
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
-
+@SuppressWarnings("unused")
 public class RegistroAnimal extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
@@ -26,7 +32,6 @@ public class RegistroAnimal extends JFrame {
 	private JTextField textField_4;
 	private JTextField textField_5;
 	private JTextField textField_6;
-	private JTextField textField_7;
 
 	/**
 	 * Launch the application.
@@ -35,7 +40,8 @@ public class RegistroAnimal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RegistroAnimal frame = new RegistroAnimal();
+					ArrayList<AnimalDTO> listaAnimales= new ArrayList<>();
+					RegistroAnimal frame = new RegistroAnimal(listaAnimales);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,118 +50,178 @@ public class RegistroAnimal extends JFrame {
 		});
 	}
 
+
 	/**
 	 * Create the frame.
 	 */
-	public RegistroAnimal() {
-		
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 867, 453);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+	public RegistroAnimal(ArrayList<AnimalDTO> listaAnimales) {  // Recibe la lista de animales
 
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		textField = new JTextField();
-		textField.setBounds(115, 62, 96, 19);
-		contentPane.add(textField);
-		textField.setColumns(10);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(115, 129, 96, 19);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
-		
-		textField_2 = new JTextField();
-		textField_2.setBounds(115, 197, 96, 19);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
-		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(115, 272, 96, 19);
-		contentPane.add(textField_3);
-		
-		JLabel lblNewLabel = new JLabel("Nombre");
-		lblNewLabel.setBounds(140, 39, 45, 13);
-		contentPane.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("Clase");
-		lblNewLabel_1.setBounds(140, 109, 45, 13);
-		contentPane.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_2 = new JLabel("Raza");
-		lblNewLabel_2.setBounds(140, 175, 45, 13);
-		contentPane.add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_3 = new JLabel("Fecha de nacimiento");
-		lblNewLabel_3.setBounds(115, 249, 96, 13);
-		contentPane.add(lblNewLabel_3);
-		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(291, 62, 96, 19);
-		contentPane.add(textField_4);
-		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(291, 129, 96, 19);
-		contentPane.add(textField_5);
-		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(291, 197, 96, 19);
-		contentPane.add(textField_6);
-		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(291, 272, 96, 19);
-		contentPane.add(textField_7);
-		
-		JLabel lblNewLabel_4 = new JLabel("Edad");
-		lblNewLabel_4.setBounds(317, 39, 45, 13);
-		contentPane.add(lblNewLabel_4);
-		
-		JLabel lblNewLabel_4_1 = new JLabel("Sexo");
-		lblNewLabel_4_1.setBounds(317, 109, 45, 13);
-		contentPane.add(lblNewLabel_4_1);
-		
-		JLabel lblNewLabel_2_1 = new JLabel("Peso");
-		lblNewLabel_2_1.setBounds(317, 175, 45, 13);
-		contentPane.add(lblNewLabel_2_1);
-		
-		JLabel lblNewLabel_3_1 = new JLabel("Está castrado");
-		lblNewLabel_3_1.setBounds(305, 249, 71, 13);
-		contentPane.add(lblNewLabel_3_1);
-		
-		JLabel lblNewLabel_4_2 = new JLabel("Características particulares");
-		lblNewLabel_4_2.setBounds(460, 39, 178, 13);
-		contentPane.add(lblNewLabel_4_2);
-		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(470, 59, 170, 89);
-		contentPane.add(textArea);
-		
-		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.addActionListener(new ActionListener() {
+        setTitle("Registrar mascotas");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 784, 439);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+
+        // Labels
+        JLabel lblNombre = new JLabel("Nombre");
+        lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        lblNombre.setBounds(30, 31, 65, 22);
+        contentPane.add(lblNombre);
+
+        JLabel lblEspecie = new JLabel("Especie");
+        lblEspecie.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        lblEspecie.setBounds(30, 63, 65, 22);
+        contentPane.add(lblEspecie);
+
+        JLabel lblRaza = new JLabel("Raza");
+        lblRaza.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        lblRaza.setBounds(30, 98, 65, 22);
+        contentPane.add(lblRaza);
+
+        JLabel lblFechaNacimiento = new JLabel("Fecha de nacimiento");
+        lblFechaNacimiento.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        lblFechaNacimiento.setBounds(10, 130, 129, 19);
+        contentPane.add(lblFechaNacimiento);
+
+        JLabel lblGenero = new JLabel("Género");
+        lblGenero.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        lblGenero.setBounds(30, 172, 65, 22);
+        contentPane.add(lblGenero);
+
+        JLabel lblPeso = new JLabel("Peso");
+        lblPeso.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        lblPeso.setBounds(30, 218, 45, 13);
+        contentPane.add(lblPeso);
+
+        JLabel lblTamano = new JLabel("Tamaño");
+        lblTamano.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        lblTamano.setBounds(30, 266, 75, 16);
+        contentPane.add(lblTamano);
+
+        JLabel lblCaracteristicas = new JLabel("Características particulares");
+        lblCaracteristicas.setBounds(462, 10, 180, 22);
+        contentPane.add(lblCaracteristicas);
+
+        JLabel lblCastrado = new JLabel("¿Está castrado?");
+        lblCastrado.setBounds(30, 314, 100, 22);
+        contentPane.add(lblCastrado);
+
+        // Campos de texto
+        textField = new JTextField();    // Nombre
+        textField.setBounds(149, 33, 167, 19);
+        contentPane.add(textField);
+        textField.setColumns(10);
+
+        textField_1 = new JTextField();  // Especie
+        textField_1.setBounds(149, 65, 167, 19);
+        contentPane.add(textField_1);
+        textField_1.setColumns(10);
+
+        textField_2 = new JTextField();  // Raza
+        textField_2.setBounds(149, 100, 167, 19);
+        contentPane.add(textField_2);
+        textField_2.setColumns(10);
+
+        textField_3 = new JTextField();  // Fecha de nacimiento
+        textField_3.setBounds(149, 129, 167, 19);
+        contentPane.add(textField_3);
+        textField_3.setColumns(10);
+
+        textField_4 = new JTextField();  // Peso
+        textField_4.setBounds(149, 215, 96, 19);
+        contentPane.add(textField_4);
+        textField_4.setColumns(10);
+
+        textField_5 = new JTextField();  // Tamaño
+        textField_5.setBounds(149, 266, 96, 19);
+        contentPane.add(textField_5);
+        textField_5.setColumns(10);
+
+        textField_6 = new JTextField();  // Características particulares
+        textField_6.setBounds(462, 42, 283, 294);
+        contentPane.add(textField_6);
+        textField_6.setColumns(10);
+
+        // Botones de Radio para Género
+        JRadioButton rdbtnMasculino = new JRadioButton("Masculino");
+        rdbtnMasculino.setBounds(149, 173, 103, 21);
+        contentPane.add(rdbtnMasculino);
+
+        JRadioButton rdbtnFemenino = new JRadioButton("Femenino");
+        rdbtnFemenino.setBounds(254, 173, 103, 21);
+        contentPane.add(rdbtnFemenino);
+
+        ButtonGroup grupoGenero = new ButtonGroup();
+        grupoGenero.add(rdbtnMasculino);
+        grupoGenero.add(rdbtnFemenino);
+
+        // Botones de Radio para Castrado
+        JRadioButton rdbtnCastradoSi = new JRadioButton("Afirmativo");
+        rdbtnCastradoSi.setBounds(149, 315, 103, 21);
+        contentPane.add(rdbtnCastradoSi);
+
+        JRadioButton rdbtnCastradoNo = new JRadioButton("Negativo");
+        rdbtnCastradoNo.setBounds(254, 315, 103, 21);
+        contentPane.add(rdbtnCastradoNo);
+
+        ButtonGroup grupoCastrado = new ButtonGroup();
+        grupoCastrado.add(rdbtnCastradoSi);
+        grupoCastrado.add(rdbtnCastradoNo);
+
+        // Botón "Aceptar"
+        JButton btnAceptar = new JButton("Aceptar");
+        btnAceptar.setBounds(501, 365, 85, 21);
+        btnAceptar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //agregarAnimal();
+                // Recoger datos del formulario
+                String nombre = textField.getText();
+                String especie = textField_1.getText();
+                String raza = textField_2.getText();
+                String fechaNac = textField_3.getText();
+                int edad = Integer.parseInt(textField_5.getText());  // Edad
+                String peso = textField_4.getText();
+                String sexo = rdbtnMasculino.isSelected() ? "Macho" : "Hembra";
+                String caractParticulares = textField_6.getText();
+                boolean estaCastrado = rdbtnCastradoSi.isSelected();
+
+                // Crear un nuevo objeto Animal y agregarlo a la lista
+                AnimalDTO nuevoAnimal = new AnimalDTO(nombre, especie, raza, fechaNac, edad, peso, sexo, estaCastrado, caractParticulares);
+                listaAnimales.add(nuevoAnimal);
+
+                // Mensaje de confirmación
+                JOptionPane.showMessageDialog(null, "Mascota registrada exitosamente.");
+                
+                // Limpiar los campos
+                textField.setText("");
+                textField_1.setText("");
+                textField_2.setText("");
+                textField_3.setText("");
+                textField_4.setText("");
+                textField_5.setText("");
+                textField_6.setText("");
+                // Desmarcar los botones de radio
+                ButtonGroup grupoGenero = new ButtonGroup();
+                grupoGenero.clearSelection();
+
+                ButtonGroup grupoCastrado = new ButtonGroup();
+                grupoCastrado.clearSelection();
             }
         });
-		btnAceptar.setBounds(524, 330, 85, 21);
-		contentPane.add(btnAceptar);
-		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose(); // Cierra la ventana
-			}
-		});
-		btnCancelar.setBounds(619, 330, 85, 21);
-		contentPane.add(btnCancelar);
+        contentPane.add(btnAceptar);
+        
+        // Botón "Cancelar"
+        JButton btnCancelar = new JButton("Cancelar");
+        btnCancelar.setBounds(651, 365, 85, 21);
+        btnCancelar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Cerrar la ventana
+            }
+        });
+        
+        contentPane.add(btnCancelar);
+
 	}
-	
-	
+
 }

@@ -1,21 +1,20 @@
 package ar.edu.unrn.seminario.dto;
 
-import java.time.LocalDate;
-
 public class AnimalDTO {
     private String nombre;
     private String especie;
-    private RazaDTO raza; // Usando RazaDTO
-    private LocalDate fechaNac;
+    //private RazaDTO raza; // Usando RazaDTO
+    private String raza;
+    private String fechaNac;
     private int edad;
-    private float peso;
+    private String peso;
     private String sexo;
     private boolean estaCastrado;
     private String caractParticulares;
 
     // Constructor
-    public AnimalDTO(String nombre, String especie, RazaDTO raza, LocalDate fechaNac, int edad,
-                     float peso, String sexo, boolean estaCastrado, String caractParticulares) {
+    public AnimalDTO(String nombre, String especie, String raza, String fechaNac, int edad,
+                     String peso, String sexo, boolean estaCastrado, String caractParticulares) {
         this.nombre = nombre;
         this.especie = especie;
         this.raza = raza; // Usando RazaDTO
@@ -27,7 +26,20 @@ public class AnimalDTO {
         this.caractParticulares = caractParticulares;
     }
 
-    // Getters y Setters
+    public AnimalDTO(String nombre2, String especie2, String raza2, String fechaNac2, String peso2,
+			boolean estaCastrado2, String caractParticulares2) {
+    	this.nombre = nombre2;
+        this.especie = especie2;
+        this.raza = raza2; // Usando RazaDTO
+        this.fechaNac = fechaNac2;
+        //this.edad = edad2;
+        this.peso = peso2;
+        //this.sexo = sexo;
+        this.estaCastrado = estaCastrado2;
+        this.caractParticulares = caractParticulares2;
+	}
+
+	// Getters y Setters
     public String getNombre() {
         return nombre;
     }
@@ -44,19 +56,19 @@ public class AnimalDTO {
         this.especie = especie;
     }
 
-    public RazaDTO getRaza() {
+    public String getRaza() {
         return raza;
     }
 
-    public void setRaza(RazaDTO raza) {
+    public void setRaza(String raza) {
         this.raza = raza;
     }
 
-    public LocalDate getFechaNac() {
+    public String getFechaNac() {
         return fechaNac;
     }
 
-    public void setFechaNac(LocalDate fechaNac) {
+    public void setFechaNac(String fechaNac) {
         this.fechaNac = fechaNac;
     }
 
@@ -68,11 +80,11 @@ public class AnimalDTO {
         this.edad = edad;
     }
 
-    public float getPeso() {
+    public String getPeso() {
         return peso;
     }
 
-    public void setPeso(float peso) {
+    public void setPeso(String peso) {
         this.peso = peso;
     }
 

@@ -2,7 +2,7 @@ package ar.edu.unrn.seminario.modelo;
 
 import java.util.ArrayList;
 
-public class Dueño extends Rol{
+public class Dueño{
 	private String nombre;
 	private String apellido;
 	private String email;
@@ -10,7 +10,9 @@ public class Dueño extends Rol{
 	private String direccion;
 	
 	public Dueño (String nombre, String apellido, String email, String direccion) {
-		super(nombre, apellido, email);
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
 		this.direccion = direccion;
 	}
 	
@@ -41,6 +43,7 @@ public class Dueño extends Rol{
 	public ArrayList <Animal> listarAnimales () {
 		return this.listaAnimales;
 	}
+	
 	
 	//--------------------------------------------------------
 	public String getNombre() {

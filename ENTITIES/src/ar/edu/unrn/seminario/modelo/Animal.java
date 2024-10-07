@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.Period;
 
 public class Animal {
+	
+	int iD;
 	String nombre;
 	String especie;
 	Raza raza;
@@ -15,7 +17,8 @@ public class Animal {
 	LibretaSanitaria libretaSanitaria;
 	String caractParticulares;
 	
-	public Animal(String nombre, String especie, Raza raza, LocalDate fechaNac, float peso, String sexo, boolean estaCastrado, String caractParticulares) {
+	public Animal(String nombre, String especie, Raza raza, LocalDate fechaNac, float peso, String sexo, boolean estaCastrado, String caractParticulares, int iD) {
+		this.iD = iD;
 		this.nombre = nombre;
 		this.especie = especie;
 		this.raza = raza;
@@ -120,6 +123,10 @@ public class Animal {
 
 	public void setCaractParticulares(String caractParticulares) {
 		this.caractParticulares = caractParticulares;
+	}
+
+	public int getID() {
+		return this.iD;
 	}
 	
 }

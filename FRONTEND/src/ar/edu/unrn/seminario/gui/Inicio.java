@@ -1,15 +1,20 @@
 package ar.edu.unrn.seminario.gui;
 
-import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.SwingConstants;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
+import javax.swing.JFrame;
+
+import javax.swing.JPanel;
+
+import javax.swing.border.EmptyBorder;
+
+import ar.edu.unrn.seminario.dto.AnimalDTO;
 
 public class Inicio extends JFrame {
 
@@ -36,6 +41,8 @@ public class Inicio extends JFrame {
 	 * Create the frame.
 	 */
 	public Inicio() {
+		ArrayList<AnimalDTO> lista= new ArrayList<>();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 861, 527);
 		contentPane = new JPanel();
@@ -43,20 +50,31 @@ public class Inicio extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Inicio");
-		lblNewLabel.setBackground(new Color(204, 255, 153));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Segoe UI Historic", Font.PLAIN, 18));
-		lblNewLabel.setForeground(new Color(0, 64, 0));
-		lblNewLabel.setBounds(22, 20, 802, 27);
-		contentPane.add(lblNewLabel);
+		JButton Registrar = new JButton("Registrar animal");
+		Registrar.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		Registrar.setBounds(210, 86, 394, 56);
+		Registrar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				RegistroAnimal registro = new RegistroAnimal(lista);
+		        registro.setVisible(true);
+			}
+			
+		});
+		contentPane.add(Registrar);
 		
-		JButton btnNewButton = new JButton("Registrar animal");
-		btnNewButton.setBounds(82, 104, 179, 21);
-		contentPane.add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("Mostrar animales");
-		btnNewButton_1.setBounds(82, 152, 179, 21);
-		contentPane.add(btnNewButton_1);
+		JButton MostrarAnimal = new JButton("Mostrar animales");
+		MostrarAnimal.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		MostrarAnimal.setBounds(210, 191, 394, 56);
+		MostrarAnimal.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MenuAnimal menu = new MenuAnimal(lista);
+				menu.setVisible(true);
+			}
+			
+		});
+		contentPane.add(MostrarAnimal);
 	}
 }
