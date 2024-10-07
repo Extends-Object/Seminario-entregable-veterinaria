@@ -1,11 +1,12 @@
 package ar.edu.unrn.seminario.dto;
 
+import java.time.LocalDate;
+
 public class AnimalDTO {
     private String nombre;
     private String especie;
-    //private RazaDTO raza; // Usando RazaDTO
-    private String raza;
-    private String fechaNac;
+    private RazaDTO raza;
+    private LocalDate fechaNac;
     private int edad;
     private String peso;
     private String sexo;
@@ -13,7 +14,7 @@ public class AnimalDTO {
     private String caractParticulares;
 
     // Constructor
-    public AnimalDTO(String nombre, String especie, String raza, String fechaNac, int edad,
+    public AnimalDTO(String nombre, String especie, RazaDTO raza, LocalDate fechaNac, int edad,
                      String peso, String sexo, boolean estaCastrado, String caractParticulares) {
         this.nombre = nombre;
         this.especie = especie;
@@ -26,15 +27,15 @@ public class AnimalDTO {
         this.caractParticulares = caractParticulares;
     }
 
-    public AnimalDTO(String nombre2, String especie2, String raza2, String fechaNac2, String peso2,
+    public AnimalDTO(String nombre2, String especie2, RazaDTO raza2, LocalDate fechaNac2, String peso2,
 			boolean estaCastrado2, String caractParticulares2) {
     	this.nombre = nombre2;
         this.especie = especie2;
-        this.raza = raza2; // Usando RazaDTO
+        this.raza = raza2;
         this.fechaNac = fechaNac2;
-        //this.edad = edad2;
+        
         this.peso = peso2;
-        //this.sexo = sexo;
+        
         this.estaCastrado = estaCastrado2;
         this.caractParticulares = caractParticulares2;
 	}
@@ -56,19 +57,19 @@ public class AnimalDTO {
         this.especie = especie;
     }
 
-    public String getRaza() {
+    public RazaDTO getRaza() {
         return raza;
     }
 
-    public void setRaza(String raza) {
+    public void setRaza(RazaDTO raza) {
         this.raza = raza;
     }
 
-    public String getFechaNac() {
+    public LocalDate getFechaNac() {
         return fechaNac;
     }
 
-    public void setFechaNac(String fechaNac) {
+    public void setFechaNac(LocalDate fechaNac) {
         this.fechaNac = fechaNac;
     }
 
