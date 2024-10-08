@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import ar.edu.unrn.seminario.dto.AnimalDTO;
+import ar.edu.unrn.seminario.dto.RazaDTO;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,6 +21,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 @SuppressWarnings("unused")
 public class RegistroAnimal extends JFrame {
 	
@@ -27,10 +29,8 @@ public class RegistroAnimal extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
-	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
-	private JTextField textField_5;
 	private JTextField textField_6;
 
 	/**
@@ -55,7 +55,7 @@ public class RegistroAnimal extends JFrame {
 	 * Create the frame.
 	 */
 	public RegistroAnimal(ArrayList<AnimalDTO> listaAnimales) {  // Recibe la lista de animales
-
+		ArrayList<RazaDTO> razas;
         setTitle("Registrar mascotas");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 784, 439);
@@ -95,11 +95,6 @@ public class RegistroAnimal extends JFrame {
         lblPeso.setBounds(30, 218, 45, 13);
         contentPane.add(lblPeso);
 
-        JLabel lblTamano = new JLabel("Tamaño");
-        lblTamano.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        lblTamano.setBounds(30, 266, 75, 16);
-        contentPane.add(lblTamano);
-
         JLabel lblCaracteristicas = new JLabel("Características particulares");
         lblCaracteristicas.setBounds(462, 10, 180, 22);
         contentPane.add(lblCaracteristicas);
@@ -119,11 +114,6 @@ public class RegistroAnimal extends JFrame {
         contentPane.add(textField_1);
         textField_1.setColumns(10);
 
-        textField_2 = new JTextField();  // Raza
-        textField_2.setBounds(149, 100, 167, 19);
-        contentPane.add(textField_2);
-        textField_2.setColumns(10);
-
         textField_3 = new JTextField();  // Fecha de nacimiento
         textField_3.setBounds(149, 129, 167, 19);
         contentPane.add(textField_3);
@@ -133,11 +123,6 @@ public class RegistroAnimal extends JFrame {
         textField_4.setBounds(149, 215, 96, 19);
         contentPane.add(textField_4);
         textField_4.setColumns(10);
-
-        textField_5 = new JTextField();  // Tamaño
-        textField_5.setBounds(149, 266, 96, 19);
-        contentPane.add(textField_5);
-        textField_5.setColumns(10);
 
         textField_6 = new JTextField();  // Características particulares
         textField_6.setBounds(462, 42, 283, 294);
@@ -185,8 +170,9 @@ public class RegistroAnimal extends JFrame {
                 String sexo = rdbtnMasculino.isSelected() ? "Macho" : "Hembra";
                 String caractParticulares = textField_6.getText();
                 boolean estaCastrado = rdbtnCastradoSi.isSelected();
-
+                memoryApi.guardarAnimal()
                 // Crear un nuevo objeto Animal y agregarlo a la lista
+                //ESTO NO VA
                 AnimalDTO nuevoAnimal = new AnimalDTO(nombre, especie, raza, fechaNac, edad, peso, sexo, estaCastrado, caractParticulares);
                 listaAnimales.add(nuevoAnimal);
 
@@ -221,7 +207,11 @@ public class RegistroAnimal extends JFrame {
         });
         
         contentPane.add(btnCancelar);
+        
+        JComboBox comboBox = new JComboBox();
+        comboBox.setBounds(135, 100, 193, 22);
+        contentPane.add(comboBox);
+        comboBox.add(razas)
 
 	}
-
 }

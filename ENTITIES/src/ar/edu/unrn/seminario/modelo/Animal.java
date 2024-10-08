@@ -9,13 +9,13 @@ public class Animal {
 	String nombre;
 	String especie;
 	Raza raza;
-	LocalDate fechaNac;
 	int edad;
 	float peso;
 	String sexo;
 	boolean estaCastrado;
 	LibretaSanitaria libretaSanitaria;
 	String caractParticulares;
+	private LocalDate fechaNac;
 	
 	public Animal(String nombre, String especie, Raza raza, LocalDate fechaNac, float peso, String sexo, boolean estaCastrado, String caractParticulares, int iD) {
 		this.iD = iD;

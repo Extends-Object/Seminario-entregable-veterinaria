@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class AnimalDTO {
     private String nombre;
-    private String especie;
+    private EspecieDTO especie;
     private RazaDTO raza;
     private LocalDate fechaNac;
     private int edad;
@@ -14,11 +14,11 @@ public class AnimalDTO {
     private String caractParticulares;
 
     // Constructor
-    public AnimalDTO(String nombre, String especie, RazaDTO raza, LocalDate fechaNac, int edad,
+    public AnimalDTO(String nombre, EspecieDTO especie, RazaDTO raza, LocalDate fechaNac, int edad,
                      String peso, String sexo, boolean estaCastrado, String caractParticulares) {
         this.nombre = nombre;
         this.especie = especie;
-        this.raza = raza; // Usando RazaDTO
+        this.raza = raza;
         this.fechaNac = fechaNac;
         this.edad = edad;
         this.peso = peso;
@@ -27,7 +27,7 @@ public class AnimalDTO {
         this.caractParticulares = caractParticulares;
     }
 
-    public AnimalDTO(String nombre2, String especie2, RazaDTO raza2, LocalDate fechaNac2, String peso2,
+    public AnimalDTO(String nombre2, EspecieDTO especie2, RazaDTO raza2, LocalDate fechaNac2, String peso2,
 			boolean estaCastrado2, String caractParticulares2) {
     	this.nombre = nombre2;
         this.especie = especie2;
@@ -49,11 +49,11 @@ public class AnimalDTO {
         this.nombre = nombre;
     }
 
-    public String getEspecie() {
+    public EspecieDTO getEspecie() {
         return especie;
     }
 
-    public void setEspecie(String especie) {
+    public void setEspecie(EspecieDTO especie) {
         this.especie = especie;
     }
 
