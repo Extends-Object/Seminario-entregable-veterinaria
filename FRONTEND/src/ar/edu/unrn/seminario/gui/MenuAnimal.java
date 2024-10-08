@@ -30,6 +30,7 @@ public class MenuAnimal extends JFrame {
         this.listaMascotas = listaMascotas;
         
         // aca hay 2 ejemplos, los use para ver si anda el codigo
+        /*
         listaMascotas.add(new AnimalDTO(
         	    "Max",               // nombre
         	    "Perro",             // especie
@@ -52,7 +53,7 @@ public class MenuAnimal extends JFrame {
         	    false,               // estaCastrado
         	    "Ojos azules, independiente" // caractParticulares
         	));
-        
+        */
         
         // Configuración del marco
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

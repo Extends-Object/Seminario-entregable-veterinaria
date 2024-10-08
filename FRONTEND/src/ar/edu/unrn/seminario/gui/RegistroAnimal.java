@@ -163,29 +163,26 @@ public class RegistroAnimal extends JFrame {
                 // Recoger datos del formulario
                 String nombre = textField.getText();
                 String especie = textField_1.getText();
-                String raza = textField_2.getText();
                 String fechaNac = textField_3.getText();
-                int edad = Integer.parseInt(textField_5.getText());  // Edad
                 String peso = textField_4.getText();
                 String sexo = rdbtnMasculino.isSelected() ? "Macho" : "Hembra";
                 String caractParticulares = textField_6.getText();
                 boolean estaCastrado = rdbtnCastradoSi.isSelected();
-                memoryApi.guardarAnimal()
+                memoryApi.guardarAnimal();
                 // Crear un nuevo objeto Animal y agregarlo a la lista
-                //ESTO NO VA
+                //ESTO NO VA 
+                /*
                 AnimalDTO nuevoAnimal = new AnimalDTO(nombre, especie, raza, fechaNac, edad, peso, sexo, estaCastrado, caractParticulares);
                 listaAnimales.add(nuevoAnimal);
-
+                */
                 // Mensaje de confirmación
                 JOptionPane.showMessageDialog(null, "Mascota registrada exitosamente.");
                 
                 // Limpiar los campos
                 textField.setText("");
                 textField_1.setText("");
-                textField_2.setText("");
                 textField_3.setText("");
                 textField_4.setText("");
-                textField_5.setText("");
                 textField_6.setText("");
                 // Desmarcar los botones de radio
                 ButtonGroup grupoGenero = new ButtonGroup();
@@ -211,7 +208,7 @@ public class RegistroAnimal extends JFrame {
         JComboBox comboBox = new JComboBox();
         comboBox.setBounds(135, 100, 193, 22);
         contentPane.add(comboBox);
-        comboBox.add(razas)
+        comboBox.add(razas);
 
 	}
 }
