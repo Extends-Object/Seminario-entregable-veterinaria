@@ -6,7 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import ar.edu.unrn.seminario.api.MemoryApi;
 import ar.edu.unrn.seminario.dto.AnimalDTO;
+import ar.edu.unrn.seminario.dto.EspecieDTO;
 import ar.edu.unrn.seminario.dto.RazaDTO;
 
 import javax.swing.JLabel;
@@ -27,11 +29,12 @@ public class RegistroAnimal extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField campoNombre;
+	private JTextField campoFechaNac;
+	private JTextField campoPeso;
 	private JTextField textField_6;
+	
+	private static MemoryApi memoryApi; // Instancia de MemoryApi
 
 	/**
 	 * Launch the application.
@@ -40,8 +43,8 @@ public class RegistroAnimal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ArrayList<AnimalDTO> listaAnimales= new ArrayList<>();
-					RegistroAnimal frame = new RegistroAnimal(listaAnimales);
+					ArrayList<AnimalDTO> listaAnimales= new ArrayList<AnimalDTO>();
+					RegistroAnimal frame = new RegistroAnimal(listaAnimales, memoryApi);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -54,9 +57,14 @@ public class RegistroAnimal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RegistroAnimal(ArrayList<AnimalDTO> listaAnimales) {  // Recibe la lista de animales
-		ArrayList<RazaDTO> razas;
-        setTitle("Registrar mascotas");
+	public RegistroAnimal(ArrayList<AnimalDTO> listaAnimales, MemoryApi memoryApi) {  // Recibe la lista de animales
+		
+		this.memoryApi = memoryApi;
+		
+		ArrayList<RazaDTO> razas; //creo que esto se envia desde el main
+        
+		
+		setTitle("Registrar mascotas");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 784, 439);
         contentPane = new JPanel();
@@ -67,32 +75,32 @@ public class RegistroAnimal extends JFrame {
         // Labels
         JLabel lblNombre = new JLabel("Nombre");
         lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        lblNombre.setBounds(30, 31, 65, 22);
+        lblNombre.setBounds(30, 66, 65, 22);
         contentPane.add(lblNombre);
 
         JLabel lblEspecie = new JLabel("Especie");
         lblEspecie.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        lblEspecie.setBounds(30, 63, 65, 22);
+        lblEspecie.setBounds(30, 101, 65, 22);
         contentPane.add(lblEspecie);
 
         JLabel lblRaza = new JLabel("Raza");
         lblRaza.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        lblRaza.setBounds(30, 98, 65, 22);
+        lblRaza.setBounds(30, 146, 65, 22);
         contentPane.add(lblRaza);
 
         JLabel lblFechaNacimiento = new JLabel("Fecha de nacimiento");
         lblFechaNacimiento.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        lblFechaNacimiento.setBounds(10, 130, 129, 19);
+        lblFechaNacimiento.setBounds(30, 186, 116, 19);
         contentPane.add(lblFechaNacimiento);
 
         JLabel lblGenero = new JLabel("Género");
         lblGenero.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        lblGenero.setBounds(30, 172, 65, 22);
+        lblGenero.setBounds(30, 225, 65, 22);
         contentPane.add(lblGenero);
 
         JLabel lblPeso = new JLabel("Peso");
         lblPeso.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        lblPeso.setBounds(30, 218, 45, 13);
+        lblPeso.setBounds(30, 270, 45, 13);
         contentPane.add(lblPeso);
 
         JLabel lblCaracteristicas = new JLabel("Características particulares");
@@ -104,25 +112,20 @@ public class RegistroAnimal extends JFrame {
         contentPane.add(lblCastrado);
 
         // Campos de texto
-        textField = new JTextField();    // Nombre
-        textField.setBounds(149, 33, 167, 19);
-        contentPane.add(textField);
-        textField.setColumns(10);
+        campoNombre = new JTextField();    // Nombre
+        campoNombre.setBounds(165, 69, 116, 19);
+        contentPane.add(campoNombre);
+        campoNombre.setColumns(10);
 
-        textField_1 = new JTextField();  // Especie
-        textField_1.setBounds(149, 65, 167, 19);
-        contentPane.add(textField_1);
-        textField_1.setColumns(10);
+        campoFechaNac = new JTextField();  // Fecha de nacimiento
+        campoFechaNac.setBounds(165, 187, 116, 19);
+        contentPane.add(campoFechaNac);
+        campoFechaNac.setColumns(10);
 
-        textField_3 = new JTextField();  // Fecha de nacimiento
-        textField_3.setBounds(149, 129, 167, 19);
-        contentPane.add(textField_3);
-        textField_3.setColumns(10);
-
-        textField_4 = new JTextField();  // Peso
-        textField_4.setBounds(149, 215, 96, 19);
-        contentPane.add(textField_4);
-        textField_4.setColumns(10);
+        campoPeso = new JTextField();  // Peso
+        campoPeso.setBounds(165, 268, 116, 19);
+        contentPane.add(campoPeso);
+        campoPeso.setColumns(10);
 
         textField_6 = new JTextField();  // Características particulares
         textField_6.setBounds(462, 42, 283, 294);
@@ -131,11 +134,11 @@ public class RegistroAnimal extends JFrame {
 
         // Botones de Radio para Género
         JRadioButton rdbtnMasculino = new JRadioButton("Masculino");
-        rdbtnMasculino.setBounds(149, 173, 103, 21);
+        rdbtnMasculino.setBounds(165, 227, 71, 21);
         contentPane.add(rdbtnMasculino);
 
         JRadioButton rdbtnFemenino = new JRadioButton("Femenino");
-        rdbtnFemenino.setBounds(254, 173, 103, 21);
+        rdbtnFemenino.setBounds(247, 227, 79, 21);
         contentPane.add(rdbtnFemenino);
 
         ButtonGroup grupoGenero = new ButtonGroup();
@@ -143,12 +146,12 @@ public class RegistroAnimal extends JFrame {
         grupoGenero.add(rdbtnFemenino);
 
         // Botones de Radio para Castrado
-        JRadioButton rdbtnCastradoSi = new JRadioButton("Afirmativo");
-        rdbtnCastradoSi.setBounds(149, 315, 103, 21);
+        JRadioButton rdbtnCastradoSi = new JRadioButton("Si");
+        rdbtnCastradoSi.setBounds(162, 315, 65, 21);
         contentPane.add(rdbtnCastradoSi);
 
-        JRadioButton rdbtnCastradoNo = new JRadioButton("Negativo");
-        rdbtnCastradoNo.setBounds(254, 315, 103, 21);
+        JRadioButton rdbtnCastradoNo = new JRadioButton("No");
+        rdbtnCastradoNo.setBounds(247, 315, 71, 21);
         contentPane.add(rdbtnCastradoNo);
 
         ButtonGroup grupoCastrado = new ButtonGroup();
@@ -160,33 +163,26 @@ public class RegistroAnimal extends JFrame {
         btnAceptar.setBounds(501, 365, 85, 21);
         btnAceptar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	
                 // Recoger datos del formulario
-                String nombre = textField.getText();
-                String especie = textField_1.getText();
-                String raza = textField_2.getText();
-                String fechaNac = textField_3.getText();
-                int edad = Integer.parseInt(textField_5.getText());  // Edad
-                String peso = textField_4.getText();
+                String nombre = campoNombre.getText();
+                //String especie = textField_1.getText();
+                String fechaNac = campoFechaNac.getText();
+                String peso = campoPeso.getText();
                 String sexo = rdbtnMasculino.isSelected() ? "Macho" : "Hembra";
                 String caractParticulares = textField_6.getText();
                 boolean estaCastrado = rdbtnCastradoSi.isSelected();
-                memoryApi.guardarAnimal()
-                // Crear un nuevo objeto Animal y agregarlo a la lista
-                //ESTO NO VA
-                AnimalDTO nuevoAnimal = new AnimalDTO(nombre, especie, raza, fechaNac, edad, peso, sexo, estaCastrado, caractParticulares);
-                listaAnimales.add(nuevoAnimal);
+                
+                memoryApi.agregarAnimal(nombre, fechaNac, peso, sexo, caractParticulares, estaCastrado);
 
                 // Mensaje de confirmación
                 JOptionPane.showMessageDialog(null, "Mascota registrada exitosamente.");
                 
                 // Limpiar los campos
-                textField.setText("");
-                textField_1.setText("");
-                textField_2.setText("");
-                textField_3.setText("");
-                textField_4.setText("");
-                textField_5.setText("");
-                textField_6.setText("");
+                campoNombre.setText("");                
+                campoFechaNac.setText("");
+                campoPeso.setText("");                
+                
                 // Desmarcar los botones de radio
                 ButtonGroup grupoGenero = new ButtonGroup();
                 grupoGenero.clearSelection();
@@ -208,10 +204,23 @@ public class RegistroAnimal extends JFrame {
         
         contentPane.add(btnCancelar);
         
-        JComboBox comboBox = new JComboBox();
-        comboBox.setBounds(135, 100, 193, 22);
-        contentPane.add(comboBox);
-        comboBox.add(razas)
+        
+        //CONFIGURACION DE COMBOBOX
+        
+     // Cargar especies
+        ArrayList<EspecieDTO> especies = memoryApi.obtenerEspecies();
+        for (EspecieDTO especie : especies) {
+            comboBoxEspecie.addItem(especie);
+        }
+        
+        JComboBox comboBoxRaza = new JComboBox();
+        comboBoxRaza.setBounds(165, 147, 116, 22);
+        contentPane.add(comboBoxRaza);
+        comboBoxRaza.add(razas);
+        
+        JComboBox comboBoxEspecie = new JComboBox();
+        comboBoxEspecie.setBounds(165, 103, 116, 21);
+        contentPane.add(comboBoxEspecie);
 
 	}
 }

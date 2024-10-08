@@ -25,7 +25,7 @@ public class MemoryApi implements IApi {
 		inicializarRazas();
 	}
 	
-	
+	//METODOS
 	private void inicializarEspecies() {
 		Especie e1 = new Especie ("Gato");
 		Especie e2 = new Especie ("Perro");
@@ -93,9 +93,14 @@ public class MemoryApi implements IApi {
 				listaAnimales.add(animal);
 			}
 		}
-		
 	}
-
+	
+	public void agregarAnimal(String nombre, String fechaNac, String peso, String sexo, String caractParticulares,
+			boolean estaCastrado) {
+		
+		//AGREGAR LA LOGICA
+	}
+	
 
 	@Override
 	public ArrayList <RazaDTO> obtenerRazas(String especie) {

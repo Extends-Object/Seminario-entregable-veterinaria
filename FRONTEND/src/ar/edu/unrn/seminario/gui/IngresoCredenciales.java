@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JPasswordField;
+import javax.swing.JButton;
 
 public class IngresoCredenciales extends JFrame {
 
@@ -66,5 +67,15 @@ public class IngresoCredenciales extends JFrame {
 		passwordField = new JPasswordField();
 		passwordField.setBounds(231, 237, 161, 30);
 		contentPane.add(passwordField);
+		
+		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnAceptar.setBounds(183, 304, 92, 21);
+		contentPane.add(btnAceptar);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnCancelar.setBounds(314, 304, 92, 21);
+		contentPane.add(btnCancelar);
 	}
 }
