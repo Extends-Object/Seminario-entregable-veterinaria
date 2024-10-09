@@ -168,7 +168,7 @@ public class RegistroAnimal extends JFrame {
                 String sexo = rdbtnMasculino.isSelected() ? "Macho" : "Hembra";
                 String caractParticulares = textField_6.getText();
                 boolean estaCastrado = rdbtnCastradoSi.isSelected();
-                memoryApi.guardarAnimal();
+               // memoryApi.guardarAnimal();
                 // Crear un nuevo objeto Animal y agregarlo a la lista
                 //ESTO NO VA 
                 /*
@@ -204,11 +204,11 @@ public class RegistroAnimal extends JFrame {
         });
         
         contentPane.add(btnCancelar);
-        
+        /*
         JComboBox comboBox = new JComboBox();
         comboBox.setBounds(135, 100, 193, 22);
         contentPane.add(comboBox);
-        comboBox.add(razas);
+        comboBox.add(razas);*/
 
 	}
 }
