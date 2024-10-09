@@ -14,12 +14,13 @@ import javax.swing.JPanel;
 
 import javax.swing.border.EmptyBorder;
 
+import ar.edu.unrn.seminario.api.IApi;
 import ar.edu.unrn.seminario.api.MemoryApi;
 import ar.edu.unrn.seminario.dto.AnimalDTO;
 
 public class Inicio extends JFrame {
 	
-	private static MemoryApi memoryApi;
+	private IApi api;
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -31,7 +32,8 @@ public class Inicio extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Inicio frame = new Inicio(memoryApi);
+					IApi api=new MemoryApi();
+					Inicio frame = new Inicio(api);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,9 +45,9 @@ public class Inicio extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Inicio(MemoryApi memoryApi) {		//RECIBE UNA INSTANCIA DE MEMORY API DESDE EL MAIN
+	public Inicio(IApi api) {		//RECIBE UNA INSTANCIA DE MEMORY API DESDE EL MAIN
 		
-		this.memoryApi = memoryApi;
+		this.api = api;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 861, 527);
@@ -62,7 +64,7 @@ public class Inicio extends JFrame {
 		Registrar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				RegistroAnimal registro = new RegistroAnimal (memoryApi);
+				RegistroAnimal registro = new RegistroAnimal (api);
 		        registro.setVisible(true);
 			}
 			
@@ -76,8 +78,8 @@ public class Inicio extends JFrame {
 		MostrarAnimal.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MenuAnimal menu = new MenuAnimal (memoryApi);
-				menu.setVisible(true);
+//				MenuAnimal menu = new MenuAnimal (api);
+//				menu.setVisible(true);
 			}
 			
 		});

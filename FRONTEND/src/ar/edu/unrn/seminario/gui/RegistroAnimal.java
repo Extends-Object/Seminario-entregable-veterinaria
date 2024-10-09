@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import ar.edu.unrn.seminario.api.IApi;
 import ar.edu.unrn.seminario.api.MemoryApi;
 import ar.edu.unrn.seminario.dto.AnimalDTO;
 import ar.edu.unrn.seminario.dto.EspecieDTO;
@@ -37,30 +38,30 @@ public class RegistroAnimal extends JFrame {
 	private JComboBox<EspecieDTO> comboBoxEspecie;
 	private JComboBox<RazaDTO> comboBoxRaza;
 	
-	private static MemoryApi memoryApi; // Instancia de MemoryApi
+	private IApi memoryApi; // Instancia de MemoryApi
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ArrayList<AnimalDTO> listaAnimales= new ArrayList<AnimalDTO>();
-					RegistroAnimal frame = new RegistroAnimal(memoryApi);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					ArrayList<AnimalDTO> listaAnimales= new ArrayList<AnimalDTO>();
+//					RegistroAnimal frame = new RegistroAnimal(memoryApi);
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 
 	/**
 	 * Create the frame.
 	 */
-	public RegistroAnimal(MemoryApi memoryApi) {  // RECIBE LA MEMORY API QUE ES DONDE VA A ESTAR LA LISTA
+	public RegistroAnimal(IApi memoryApi) {  // RECIBE LA MEMORY API QUE ES DONDE VA A ESTAR LA LISTA
 		
 		this.memoryApi = memoryApi;
         
@@ -79,11 +80,13 @@ public class RegistroAnimal extends JFrame {
         lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 12));
         lblNombre.setBounds(30, 31, 65, 22);
         contentPane.add(lblNombre);
-
+        
+        /*
         JLabel lblEspecie = new JLabel("Especie");
         lblEspecie.setFont(new Font("Tahoma", Font.PLAIN, 12));
         lblEspecie.setBounds(30, 63, 65, 22);
         contentPane.add(lblEspecie);
+        */
 
         JLabel lblRaza = new JLabel("Raza");
         lblRaza.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -172,7 +175,7 @@ public class RegistroAnimal extends JFrame {
                 // RECOGER LOS DATOS DE LOS CAMPOS
                 String nombre = campoNombre.getText();
                 String fechaNac = campoFechaNac.getText();
-                EspecieDTO especie = (EspecieDTO) comboBoxEspecie.getSelectedItem();
+                //EspecieDTO especie = (EspecieDTO) comboBoxEspecie.getSelectedItem();
                 RazaDTO raza = (RazaDTO) comboBoxRaza.getSelectedItem();
                 String peso = campoPeso.getText();
                 String sexo = rdbtnMasculino.isSelected() ? "Macho" : "Hembra";
@@ -182,7 +185,7 @@ public class RegistroAnimal extends JFrame {
                 //int edad = calcularEdad(fechaNac);
                 
                 //memoryApi.agregarAnimal(nombre, fechaNac, especie, raza, peso, sexo, caractParticulares, estaCastrado);
-                memoryApi.agregarAnimal(nombre, especie.getTipo(), raza.getTamaño(), raza.getNombre(), LocalDate.parse(fechaNac), Float.parseFloat(peso), sexo, estaCastrado, caractParticulares, 
+                memoryApi.agregarAnimal(nombre, raza.getTamaño(), raza.getNombre(), LocalDate.parse(fechaNac), Float.parseFloat(peso), sexo, estaCastrado, caractParticulares, 
                         generarIDUnico());
                 
                 
