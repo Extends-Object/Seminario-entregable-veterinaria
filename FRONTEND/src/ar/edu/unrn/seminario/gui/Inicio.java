@@ -14,9 +14,12 @@ import javax.swing.JPanel;
 
 import javax.swing.border.EmptyBorder;
 
+import ar.edu.unrn.seminario.api.MemoryApi;
 import ar.edu.unrn.seminario.dto.AnimalDTO;
 
 public class Inicio extends JFrame {
+	
+	private static MemoryApi memoryApi;
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -28,7 +31,7 @@ public class Inicio extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Inicio frame = new Inicio();
+					Inicio frame = new Inicio(memoryApi);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,8 +43,9 @@ public class Inicio extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Inicio() {
-		ArrayList<AnimalDTO> lista= new ArrayList<>();
+	public Inicio(MemoryApi memoryApi) {		//RECIBE UNA INSTANCIA DE MEMORY API DESDE EL MAIN
+		
+		this.memoryApi = memoryApi;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 861, 527);
@@ -50,31 +54,37 @@ public class Inicio extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		//----------------------------------------------------------------------------------
+		//BOTON 1 = REGISTRAR ANIMAL
 		JButton Registrar = new JButton("Registrar animal");
 		Registrar.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		Registrar.setBounds(210, 86, 394, 56);
 		Registrar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				RegistroAnimal registro = new RegistroAnimal(lista);
+				RegistroAnimal registro = new RegistroAnimal (memoryApi);
 		        registro.setVisible(true);
 			}
 			
 		});
 		contentPane.add(Registrar);
 		
+		//-----------------------------------------------------------------------------------
+		//BOTON 2 = MOSTRAR ANIMALES
 		JButton MostrarAnimal = new JButton("Mostrar animales");
 		MostrarAnimal.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		MostrarAnimal.setBounds(210, 191, 394, 56);
 		MostrarAnimal.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MenuAnimal menu = new MenuAnimal(lista);
+				MenuAnimal menu = new MenuAnimal (memoryApi);
 				menu.setVisible(true);
 			}
 			
 		});
 		contentPane.add(MostrarAnimal);
+		
+		//-----------------------------------------------------------------------------------
+		
 	}
 }

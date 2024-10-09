@@ -13,9 +13,11 @@ import java.util.TreeSet;
 public class MemoryApi implements IApi {
 	
 	//ATRIBUTO
-	private Set<Animal> listaAnimales = new TreeSet <Animal>();
-	private ArrayList<Raza> listaRazas = new ArrayList <Raza>();
-	private ArrayList<Especie> listaEspecies = new ArrayList <Especie>();
+	private Set <Animal> listaAnimales = new TreeSet <Animal>();
+	
+	
+	private ArrayList <Raza> listaRazas = new ArrayList <Raza>();
+	private ArrayList <Especie> listaEspecies = new ArrayList <Especie>();
 	
 	//CONSTRUCTOR
 	public MemoryApi(){
@@ -104,15 +106,23 @@ public class MemoryApi implements IApi {
 
 	@Override
 	public ArrayList <RazaDTO> obtenerRazas(String especie) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList <RazaDTO> razasDTO = new ArrayList <RazaDTO>();
+		for(Raza raza : listaRazas) {
+			if (raza.getEspecie().equals(especie)) {
+	            razasDTO.add(new RazaDTO(raza.getNombre(), raza.getTamaño()));
+	        }
+		}
+		return razasDTO;
 	}
 
 
 	@Override
-	public ArrayList <EspecieDTO> obtenerEspecies() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList <EspecieDTO> obtenerEspecies() {			//LA LISTA DE LA MEMORY API TIENE ESPECIES DEL DOMINIO
+		ArrayList<EspecieDTO> especiesDTO = new ArrayList<>();	//SE DDEBEN CONVERTIR A LISTA DE ESPECIES DTO
+	    for (Especie especie : listaEspecies) {					//SE LEEN DE LA LISTA
+	        especiesDTO.add(new EspecieDTO(especie.getTipo()));	//getTipo retorna un String que va al constructor de la
+	    }														//especieDTO, se crea y se agrega a la lista DTO
+	    return especiesDTO;										//SE RETORNA LA LISTA DTO
 	}
 	
 }

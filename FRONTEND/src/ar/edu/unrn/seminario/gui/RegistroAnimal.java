@@ -32,7 +32,9 @@ public class RegistroAnimal extends JFrame {
 	private JTextField campoNombre;
 	private JTextField campoFechaNac;
 	private JTextField campoPeso;
-	private JTextField textField_6;
+	private JTextField campoCaractParticulares;
+	private JComboBox<EspecieDTO> comboBoxEspecie;
+	private JComboBox<RazaDTO> comboBoxRaza;
 	
 	private static MemoryApi memoryApi; // Instancia de MemoryApi
 
@@ -44,7 +46,7 @@ public class RegistroAnimal extends JFrame {
 			public void run() {
 				try {
 					ArrayList<AnimalDTO> listaAnimales= new ArrayList<AnimalDTO>();
-					RegistroAnimal frame = new RegistroAnimal(listaAnimales, memoryApi);
+					RegistroAnimal frame = new RegistroAnimal(memoryApi);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -57,13 +59,11 @@ public class RegistroAnimal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RegistroAnimal(ArrayList<AnimalDTO> listaAnimales, MemoryApi memoryApi) {  // Recibe la lista de animales
+	public RegistroAnimal(MemoryApi memoryApi) {  // RECIBE LA MEMORY API QUE ES DONDE VA A ESTAR LA LISTA
 		
 		this.memoryApi = memoryApi;
-		
-		ArrayList<RazaDTO> razas; //creo que esto se envia desde el main
         
-		
+		//CONFIGURACION DE LA VENTANA-------------------------------------------------------------------------
 		setTitle("Registrar mascotas");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 784, 439);
@@ -72,7 +72,7 @@ public class RegistroAnimal extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        // Labels
+        // ETIQUETAS------------------------------------------------------------------------------------------
         JLabel lblNombre = new JLabel("Nombre");
         lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 12));
         lblNombre.setBounds(30, 66, 65, 22);
@@ -103,15 +103,16 @@ public class RegistroAnimal extends JFrame {
         lblPeso.setBounds(30, 270, 45, 13);
         contentPane.add(lblPeso);
 
-        JLabel lblCaracteristicas = new JLabel("Características particulares");
-        lblCaracteristicas.setBounds(462, 10, 180, 22);
-        contentPane.add(lblCaracteristicas);
+        JLabel lblCaractParticulares = new JLabel("Características particulares");
+        lblCaractParticulares.setBounds(462, 10, 180, 22);
+        contentPane.add(lblCaractParticulares);
 
         JLabel lblCastrado = new JLabel("¿Está castrado?");
         lblCastrado.setBounds(30, 314, 100, 22);
         contentPane.add(lblCastrado);
-
-        // Campos de texto
+        
+        
+        // TEXTFIELDS-------------------------------------------------------------------------------------------
         campoNombre = new JTextField();    // Nombre
         campoNombre.setBounds(165, 69, 116, 19);
         contentPane.add(campoNombre);
@@ -127,12 +128,12 @@ public class RegistroAnimal extends JFrame {
         contentPane.add(campoPeso);
         campoPeso.setColumns(10);
 
-        textField_6 = new JTextField();  // Características particulares
-        textField_6.setBounds(462, 42, 283, 294);
-        contentPane.add(textField_6);
-        textField_6.setColumns(10);
+        campoCaractParticulares = new JTextField();  // Características particulares
+        campoCaractParticulares.setBounds(462, 42, 283, 294);
+        contentPane.add(campoCaractParticulares);
+        campoCaractParticulares.setColumns(10);
 
-        // Botones de Radio para Género
+        // BOTONES DE GENERO -------------------------------------------------------------------------------------------
         JRadioButton rdbtnMasculino = new JRadioButton("Masculino");
         rdbtnMasculino.setBounds(165, 227, 71, 21);
         contentPane.add(rdbtnMasculino);
@@ -145,7 +146,7 @@ public class RegistroAnimal extends JFrame {
         grupoGenero.add(rdbtnMasculino);
         grupoGenero.add(rdbtnFemenino);
 
-        // Botones de Radio para Castrado
+        // BOTONES CASTRACION ------------------------------------------------------------------------------------------
         JRadioButton rdbtnCastradoSi = new JRadioButton("Si");
         rdbtnCastradoSi.setBounds(162, 315, 65, 21);
         contentPane.add(rdbtnCastradoSi);
@@ -158,32 +159,34 @@ public class RegistroAnimal extends JFrame {
         grupoCastrado.add(rdbtnCastradoSi);
         grupoCastrado.add(rdbtnCastradoNo);
 
-        // Botón "Aceptar"
+        // BOTON ACEPTAR------------------------------------------------------------------------------------------------
         JButton btnAceptar = new JButton("Aceptar");
         btnAceptar.setBounds(501, 365, 85, 21);
         btnAceptar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	
-                // Recoger datos del formulario
+                // RECOGER LOS DATOS DE LOS CAMPOS
                 String nombre = campoNombre.getText();
-                //String especie = textField_1.getText();
                 String fechaNac = campoFechaNac.getText();
                 String peso = campoPeso.getText();
                 String sexo = rdbtnMasculino.isSelected() ? "Macho" : "Hembra";
-                String caractParticulares = textField_6.getText();
+                String caractParticulares = campoCaractParticulares.getText();
                 boolean estaCastrado = rdbtnCastradoSi.isSelected();
+                
+                //FALTA RECOGER LOS DATOS DE ESPECIE Y RAZA DE LOS COMBO BOX
                 
                 memoryApi.agregarAnimal(nombre, fechaNac, peso, sexo, caractParticulares, estaCastrado);
 
-                // Mensaje de confirmación
+                // MENSAJE DE CONFIRMACION
                 JOptionPane.showMessageDialog(null, "Mascota registrada exitosamente.");
                 
-                // Limpiar los campos
+                // LIMPIEZA DE CAMPOS
                 campoNombre.setText("");                
                 campoFechaNac.setText("");
-                campoPeso.setText("");                
+                campoPeso.setText("");
+                campoCaractParticulares.setText("");
                 
-                // Desmarcar los botones de radio
+                //LIMPIEZA DE BOTONES
                 ButtonGroup grupoGenero = new ButtonGroup();
                 grupoGenero.clearSelection();
 
@@ -193,34 +196,40 @@ public class RegistroAnimal extends JFrame {
         });
         contentPane.add(btnAceptar);
         
-        // Botón "Cancelar"
+        // BOTON CANCELAR----------------------------------------------------------------------------------------------
         JButton btnCancelar = new JButton("Cancelar");
         btnCancelar.setBounds(651, 365, 85, 21);
         btnCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                dispose(); // Cerrar la ventana
+                dispose(); // CERRAR LA VENTANA
             }
         });
-        
         contentPane.add(btnCancelar);
         
-        
-        //CONFIGURACION DE COMBOBOX
-        
-     // Cargar especies
-        ArrayList<EspecieDTO> especies = memoryApi.obtenerEspecies();
-        for (EspecieDTO especie : especies) {
-            comboBoxEspecie.addItem(especie);
+        //CONFIGURACION DE COMBOBOX------------------------------------------------------------------------------------
+        // ESPECIES = Cargamos las especies desde la MemoryApi
+        ArrayList <EspecieDTO> listaEspecies = memoryApi.obtenerEspecies();
+        for (EspecieDTO especie : listaEspecies) { //"ESPECIES" ES LA LISTA DE ESPECIESDTO QUE SE RECUPERA DE LA API
+       		comboBoxEspecie.addItem(especie);
         }
-        
-        JComboBox comboBoxRaza = new JComboBox();
-        comboBoxRaza.setBounds(165, 147, 116, 22);
-        contentPane.add(comboBoxRaza);
-        comboBoxRaza.add(razas);
         
         JComboBox comboBoxEspecie = new JComboBox();
         comboBoxEspecie.setBounds(165, 103, 116, 21);
+        comboBoxEspecie.addActionListener(e -> {		//PARA OBTENER LA ESPECIE SELECCIONADA
+        	EspecieDTO especieSeleccionada = (EspecieDTO) comboBoxEspecie.getSelectedItem();
+        	//SEGUN LA ESPECIE VA A OBTENER LA LISTA DE RAZAS RELACIONADAS A LA MISMA
+        	//SE VAN A CARGAR DE LA MEMORY API
+        	ArrayList<RazaDTO> listaRazas = memoryApi.obtenerRazas(especieSeleccionada.getTipo());
+            for (RazaDTO raza : listaRazas) {
+                comboBoxRaza.addItem(raza);
+            }
+        });
         contentPane.add(comboBoxEspecie);
+        
+        //RAZAS
+        JComboBox comboBoxRaza = new JComboBox();
+        comboBoxRaza.setBounds(165, 147, 116, 22);
+        contentPane.add(comboBoxRaza);
 
 	}
 }
