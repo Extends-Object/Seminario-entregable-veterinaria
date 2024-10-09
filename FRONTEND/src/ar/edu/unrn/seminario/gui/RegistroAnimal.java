@@ -21,6 +21,7 @@ import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
@@ -65,6 +66,7 @@ public class RegistroAnimal extends JFrame {
         
 		//CONFIGURACION DE LA VENTANA-------------------------------------------------------------------------
 		setTitle("Registrar mascotas");
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 784, 439);
         contentPane = new JPanel();
@@ -75,32 +77,32 @@ public class RegistroAnimal extends JFrame {
         // ETIQUETAS------------------------------------------------------------------------------------------
         JLabel lblNombre = new JLabel("Nombre");
         lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        lblNombre.setBounds(30, 66, 65, 22);
+        lblNombre.setBounds(30, 31, 65, 22);
         contentPane.add(lblNombre);
 
         JLabel lblEspecie = new JLabel("Especie");
         lblEspecie.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        lblEspecie.setBounds(30, 101, 65, 22);
+        lblEspecie.setBounds(30, 63, 65, 22);
         contentPane.add(lblEspecie);
 
         JLabel lblRaza = new JLabel("Raza");
         lblRaza.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        lblRaza.setBounds(30, 146, 65, 22);
+        lblRaza.setBounds(30, 98, 65, 22);
         contentPane.add(lblRaza);
 
         JLabel lblFechaNacimiento = new JLabel("Fecha de nacimiento");
         lblFechaNacimiento.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        lblFechaNacimiento.setBounds(30, 186, 116, 19);
+        lblFechaNacimiento.setBounds(10, 130, 129, 19);
         contentPane.add(lblFechaNacimiento);
 
         JLabel lblGenero = new JLabel("Género");
         lblGenero.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        lblGenero.setBounds(30, 225, 65, 22);
+        lblGenero.setBounds(30, 172, 65, 22);
         contentPane.add(lblGenero);
 
         JLabel lblPeso = new JLabel("Peso");
         lblPeso.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        lblPeso.setBounds(30, 270, 45, 13);
+        lblPeso.setBounds(30, 218, 45, 13);
         contentPane.add(lblPeso);
 
         JLabel lblCaractParticulares = new JLabel("Características particulares");
@@ -119,12 +121,12 @@ public class RegistroAnimal extends JFrame {
         campoNombre.setColumns(10);
 
         campoFechaNac = new JTextField();  // Fecha de nacimiento
-        campoFechaNac.setBounds(165, 187, 116, 19);
+        campoFechaNac.setBounds(149, 129, 167, 19);
         contentPane.add(campoFechaNac);
         campoFechaNac.setColumns(10);
 
         campoPeso = new JTextField();  // Peso
-        campoPeso.setBounds(165, 268, 116, 19);
+        campoPeso.setBounds(149, 215, 96, 19);
         contentPane.add(campoPeso);
         campoPeso.setColumns(10);
 
@@ -135,30 +137,32 @@ public class RegistroAnimal extends JFrame {
 
         // BOTONES DE GENERO -------------------------------------------------------------------------------------------
         JRadioButton rdbtnMasculino = new JRadioButton("Masculino");
-        rdbtnMasculino.setBounds(165, 227, 71, 21);
+        rdbtnMasculino.setBounds(149, 173, 103, 21);
         contentPane.add(rdbtnMasculino);
 
         JRadioButton rdbtnFemenino = new JRadioButton("Femenino");
-        rdbtnFemenino.setBounds(247, 227, 79, 21);
+        rdbtnFemenino.setBounds(254, 173, 103, 21);
         contentPane.add(rdbtnFemenino);
 
         ButtonGroup grupoGenero = new ButtonGroup();
         grupoGenero.add(rdbtnMasculino);
         grupoGenero.add(rdbtnFemenino);
 
+        
         // BOTONES CASTRACION ------------------------------------------------------------------------------------------
         JRadioButton rdbtnCastradoSi = new JRadioButton("Si");
         rdbtnCastradoSi.setBounds(162, 315, 65, 21);
         contentPane.add(rdbtnCastradoSi);
 
-        JRadioButton rdbtnCastradoNo = new JRadioButton("No");
-        rdbtnCastradoNo.setBounds(247, 315, 71, 21);
+        JRadioButton rdbtnCastradoNo = new JRadioButton("Negativo");
+        rdbtnCastradoNo.setBounds(254, 315, 103, 21);
         contentPane.add(rdbtnCastradoNo);
 
         ButtonGroup grupoCastrado = new ButtonGroup();
         grupoCastrado.add(rdbtnCastradoSi);
         grupoCastrado.add(rdbtnCastradoNo);
 
+        
         // BOTON ACEPTAR------------------------------------------------------------------------------------------------
         JButton btnAceptar = new JButton("Aceptar");
         btnAceptar.setBounds(501, 365, 85, 21);
@@ -168,15 +172,20 @@ public class RegistroAnimal extends JFrame {
                 // RECOGER LOS DATOS DE LOS CAMPOS
                 String nombre = campoNombre.getText();
                 String fechaNac = campoFechaNac.getText();
+                EspecieDTO especie = (EspecieDTO) comboBoxEspecie.getSelectedItem();
+                RazaDTO raza = (RazaDTO) comboBoxRaza.getSelectedItem();
                 String peso = campoPeso.getText();
                 String sexo = rdbtnMasculino.isSelected() ? "Macho" : "Hembra";
                 String caractParticulares = campoCaractParticulares.getText();
                 boolean estaCastrado = rdbtnCastradoSi.isSelected();
                 
-                //FALTA RECOGER LOS DATOS DE ESPECIE Y RAZA DE LOS COMBO BOX
+                //int edad = calcularEdad(fechaNac);
                 
-                memoryApi.agregarAnimal(nombre, fechaNac, peso, sexo, caractParticulares, estaCastrado);
-
+                //memoryApi.agregarAnimal(nombre, fechaNac, especie, raza, peso, sexo, caractParticulares, estaCastrado);
+                memoryApi.agregarAnimal(nombre, especie.getTipo(), raza.getTamaño(), raza.getNombre(), LocalDate.parse(fechaNac), Float.parseFloat(peso), sexo, estaCastrado, caractParticulares, 
+                        generarIDUnico());
+                
+                
                 // MENSAJE DE CONFIRMACION
                 JOptionPane.showMessageDialog(null, "Mascota registrada exitosamente.");
                 
@@ -231,5 +240,11 @@ public class RegistroAnimal extends JFrame {
         comboBoxRaza.setBounds(165, 147, 116, 22);
         contentPane.add(comboBoxRaza);
 
+	}
+
+
+	protected String generarIDUnico() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -12,16 +12,14 @@ import java.util.TreeSet;
 
 public class MemoryApi implements IApi {
 	
-	//ATRIBUTO
+	//ATRIBUTOS
 	private Set <Animal> listaAnimales = new TreeSet <Animal>();
-	
 	
 	private ArrayList <Raza> listaRazas = new ArrayList <Raza>();
 	private ArrayList <Especie> listaEspecies = new ArrayList <Especie>();
 	
 	//CONSTRUCTOR
 	public MemoryApi(){
-		
 		Set<Animal> listaAnimales = new TreeSet <Animal>();
 		this.listaAnimales = listaAnimales;
 		inicializarRazas();
@@ -53,7 +51,8 @@ public class MemoryApi implements IApi {
 	*/
 	}
 
-
+	
+	//BORRAR UN ANIMAL REGISTRADO
 	public void borrarAnimal(int iD){
 		for(Animal animal: listaAnimales){
 			if(iD == animal.getID()){
@@ -63,6 +62,7 @@ public class MemoryApi implements IApi {
 		}		
 	}
 	
+	//MODIFICAR UN ANIMAL REGISTRADO
 	public void modificarAnimal (int iD, String nombre, int edad, float peso, boolean estaCastrado, String caractParticulares){
 		
 		for(Animal animal: listaAnimales){
@@ -75,10 +75,10 @@ public class MemoryApi implements IApi {
 			}
 		}	
 	}
-
+	
+	//AGREGAR UN ANIMAL A LA LISTA DE ANIMALES REGISTRADOS
 	@Override
-	public void agregarAnimal(String nombre, String especie, String tamaño, String raza, LocalDate fechaNac, int edad,
-			float peso, String sexo, boolean estaCastrado, String caractParticulares, int iD)
+	public void agregarAnimal(String nombre, String especie, String tamaño, String raza, LocalDate fechaNac, float peso, String sexo, boolean estaCastrado, String caractParticulares, int iD)
 			throws AnimalExistsInArrayException {
 		
 		ArrayList <Vacuna> vacunas = new ArrayList <Vacuna>();
@@ -97,13 +97,7 @@ public class MemoryApi implements IApi {
 		}
 	}
 	
-	public void agregarAnimal(String nombre, String fechaNac, String peso, String sexo, String caractParticulares,
-			boolean estaCastrado) {
-		
-		//AGREGAR LA LOGICA
-	}
-	
-
+	//OBTENER LA LISTA DE RAZAS SEGUN LA ESPECIE
 	@Override
 	public ArrayList <RazaDTO> obtenerRazas(String especie) {
 		ArrayList <RazaDTO> razasDTO = new ArrayList <RazaDTO>();
@@ -115,7 +109,8 @@ public class MemoryApi implements IApi {
 		return razasDTO;
 	}
 
-
+	
+	//OBTENER LA LISTA DE ESPECIES CARGADAS EN LA BASE
 	@Override
 	public ArrayList <EspecieDTO> obtenerEspecies() {			//LA LISTA DE LA MEMORY API TIENE ESPECIES DEL DOMINIO
 		ArrayList<EspecieDTO> especiesDTO = new ArrayList<>();	//SE DDEBEN CONVERTIR A LISTA DE ESPECIES DTO
