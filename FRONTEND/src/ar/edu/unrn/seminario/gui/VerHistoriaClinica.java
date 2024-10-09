@@ -37,12 +37,12 @@ public class VerHistoriaClinica extends JFrame {
 	public VerHistoriaClinica() {
 		setTitle("Historia Clinica");
 		// estructura provisional para historia clinica y crear el jtable para ver como seria el resultado final
-		String [] columnas= {"fecha","provisional","diferencial","definitivo","tratamiento","prescripciones","estudios"};
+		String [] columnas= {"Fecha","Provisional","Diferencial","Definitivo","Tratamiento","Prescripciones","Estudios"};
 		DefaultTableModel modelo= new DefaultTableModel(columnas,0);
 		tabla= new JTable(modelo);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 847, 359);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -50,7 +50,7 @@ public class VerHistoriaClinica extends JFrame {
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane(tabla);
-		scrollPane.setBounds(10, 10, 416, 20);
+		scrollPane.setBounds(10, 10, 813, 20);
 		contentPane.add(scrollPane);
 	}
 

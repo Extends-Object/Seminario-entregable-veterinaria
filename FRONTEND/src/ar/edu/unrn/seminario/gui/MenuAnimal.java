@@ -29,13 +29,13 @@ public class MenuAnimal extends JFrame {
 	public MenuAnimal(ArrayList<AnimalDTO> listaMascotas) {
         this.listaMascotas = listaMascotas;
         
-        // aca hay 2 ejemplos, los use para ver si anda el codigo
-        /*
+     // aca hay 2 ejemplos, los use para ver si anda el codigo
+        
         listaMascotas.add(new AnimalDTO(
         	    "Max",               // nombre
-        	    "Perro",             // especie
-        	    "Labrador",          // raza
-        	    "12/05/2018",        // fechaNac
+        	    null,             // especie
+        	    null,          // raza
+        	    null,        // fechaNac
         	    6,                   // edad
         	    "25 kg",             // peso
         	    "Macho",             // sexo
@@ -44,16 +44,16 @@ public class MenuAnimal extends JFrame {
         	));
         listaMascotas.add(new AnimalDTO(
         	    "Mia",               // nombre
-        	    "Gato",              // especie
-        	    "Siames",            // raza
-        	    "23/08/2020",        // fechaNac
+        	    null,              // especie
+        	    null,            // raza
+        	    null,        // fechaNac
         	    4,                   // edad
         	    "4.5 kg",            // peso
         	    "Hembra",            // sexo
         	    false,               // estaCastrado
         	    "Ojos azules, independiente" // caractParticulares
         	));
-        */
+        
         
         // Configuración del marco
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -100,6 +100,28 @@ public class MenuAnimal extends JFrame {
             libretaSanitaria.add(esquemaVacunatorio);
             libretaSanitaria.add(registrarVacuna);
 
+            libretaSanitaria.add(esquemaVacunatorio);
+            libretaSanitaria.add(registrarVacuna);
+
+            // Añadir ActionListener para abrir la ventana de verHistoriaClinica
+            historiaClinica.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // Suponiendo que verHistoriaClinica sea un JFrame
+                    VerHistoriaClinica ventanaHistoriaClinica = new VerHistoriaClinica();
+                    ventanaHistoriaClinica.setVisible(true);  // Mostrar la ventana
+                }
+            });
+
+            // Añadir ActionListener para abrir la ventana de verLibretaSanitaria
+            esquemaVacunatorio.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // Suponiendo que verLibretaSanitaria sea un JFrame
+                	VerLibretaSanitaria ventanaLibretaSanitaria = new VerLibretaSanitaria();
+                    ventanaLibretaSanitaria.setVisible(true);  // Mostrar la ventana
+                }
+            });
             // Opción para eliminar la mascota
             JMenuItem eliminar = new JMenuItem("Eliminar");
             eliminar.addActionListener(new ActionListener() {
@@ -147,4 +169,29 @@ public class MenuAnimal extends JFrame {
 			}
 		});
 }
+ // aca hay 2 ejemplos, los use para ver si anda el codigo
+    /*
+    listaMascotas.add(new AnimalDTO(
+    	    "Max",               // nombre
+    	    "Perro",             // especie
+    	    "Labrador",          // raza
+    	    "12/05/2018",        // fechaNac
+    	    6,                   // edad
+    	    "25 kg",             // peso
+    	    "Macho",             // sexo
+    	    true,                // estaCastrado
+    	    "Color negro, amigable" // caractParticulares
+    	));
+    listaMascotas.add(new AnimalDTO(
+    	    "Mia",               // nombre
+    	    "Gato",              // especie
+    	    "Siames",            // raza
+    	    "23/08/2020",        // fechaNac
+    	    4,                   // edad
+    	    "4.5 kg",            // peso
+    	    "Hembra",            // sexo
+    	    false,               // estaCastrado
+    	    "Ojos azules, independiente" // caractParticulares
+    	));
+    */
 }
