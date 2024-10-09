@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import ar.edu.unrn.seminario.api.IApi;
+import ar.edu.unrn.seminario.api.MemoryApi;
 import ar.edu.unrn.seminario.dto.AnimalDTO;
 
 import javax.swing.JFrame;
@@ -21,177 +23,115 @@ public class MenuAnimal extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-    private JMenuBar menuBar;
-    private JMenu mascotasMenu;;
-	private ArrayList<AnimalDTO> listaMascotas;
-	
+	private JMenuBar menuBar;
+	private JMenu mascotasMenu;
 
-	public MenuAnimal(ArrayList<AnimalDTO> listaMascotas) {
-        this.listaMascotas = listaMascotas;
-        
-     // aca hay 2 ejemplos, los use para ver si anda el codigo
-        
-        listaMascotas.add(new AnimalDTO(
-        	    "Max",               // nombre
-        	    null,             // especie
-        	    null,          // raza
-        	    null,        // fechaNac
-        	    6,                   // edad
-        	    "25 kg",             // peso
-        	    "Macho",             // sexo
-        	    true,                // estaCastrado
-        	    "Color negro, amigable" // caractParticulares
-        	));
-        listaMascotas.add(new AnimalDTO(
-        	    "Mia",               // nombre
-        	    null,              // especie
-        	    null,            // raza
-        	    null,        // fechaNac
-        	    4,                   // edad
-        	    "4.5 kg",            // peso
-        	    "Hembra",            // sexo
-        	    false,               // estaCastrado
-        	    "Ojos azules, independiente" // caractParticulares
-        	));
-        
-        
-        // Configuración del marco
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 600, 400);
+	private IApi memoryApi;
 
-        // Panel de contenido
-        contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        contentPane.setLayout(null);
-        setContentPane(contentPane);
+	public MenuAnimal(IApi memoryApi) {
 
-        // Barra de menú
-        menuBar = new JMenuBar();
-        menuBar.setBounds(0, 0, 600, 30);
-        contentPane.add(menuBar);
+		this.memoryApi = memoryApi;
 
-        // Menú principal de "Mascotas"
-        mascotasMenu = new JMenu("Mascotas");
-        menuBar.add(mascotasMenu);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(null);
+		setContentPane(contentPane);
 
-        // Agregar menús dinámicos para cada mascota
-        agregarAnimalesAlMenu();
+		// BARRA DEL MENU
+		menuBar = new JMenuBar();
+		menuBar.setBounds(0, 0, 600, 30);
+		contentPane.add(menuBar);
 
-        // Mostrar la ventana
-        setVisible(true);
-    }
+		// MENU PRINCIPAL DE LAS MASCOTAS
+		mascotasMenu = new JMenu("Mascotas");
+		menuBar.add(mascotasMenu);
 
-    // Método para agregar cada mascota al menú con sus opciones
-    private void agregarAnimalesAlMenu() {
-        for (AnimalDTO mascota : listaMascotas) {
-            // Crear un nuevo menú para la mascota
-            JMenu menuMascota = new JMenu(mascota.getNombre());
+		// AGREGAR MENU DINAMICO PARA CADA MASCOTA
+		agregarAnimalesAlMenu();
 
-            // Crear las opciones del menú de la mascota
-            JMenuItem historiaClinica = new JMenuItem("Historia clínica");
-            JMenuItem visitas = new JMenuItem("Visitas");
-            JMenuItem prescripciones = new JMenuItem("Prescripciones");
+		// MOSTRAR VENTANA
+		setVisible(true);
 
-            // Submenú de "Libreta Sanitaria" con subopciones
-            JMenu libretaSanitaria = new JMenu("Libreta Sanitaria");
-            JMenuItem esquemaVacunatorio = new JMenuItem("Esquema vacunatorio");
-            JMenuItem registrarVacuna = new JMenuItem("Registrar vacuna");
+	}
+	//--------------------------------------------------------------------------------------------------------
+	// Método para agregar cada mascota al menú con sus opciones
+	private void agregarAnimalesAlMenu() {
 
-            libretaSanitaria.add(esquemaVacunatorio);
-            libretaSanitaria.add(registrarVacuna);
+		ArrayList<AnimalDTO> listaAnimalesDTO = memoryApi.animalToDTO();
 
-            libretaSanitaria.add(esquemaVacunatorio);
-            libretaSanitaria.add(registrarVacuna);
+		// AGREGAR LA LISTA DE ANIMALES AL MENU
+		for (AnimalDTO animal : listaAnimalesDTO) {
+			
+			JMenu menuAnimal = new JMenu(animal.getNombre()); 			// CREAR EL MENU DE UNA MASCOTA
 
-            // Añadir ActionListener para abrir la ventana de verHistoriaClinica
-            historiaClinica.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    // Suponiendo que verHistoriaClinica sea un JFrame
-                    VerHistoriaClinica ventanaHistoriaClinica = new VerHistoriaClinica();
-                    ventanaHistoriaClinica.setVisible(true);  // Mostrar la ventana
-                }
-            });
+			JMenuItem historiaClinica = new JMenuItem("Historia clínica");	// OPCIONES DEL MENU DEL ANIMAL
+			JMenuItem visitas = new JMenuItem("Visitas");
+			JMenuItem prescripciones = new JMenuItem("Prescripciones");
 
-            // Añadir ActionListener para abrir la ventana de verLibretaSanitaria
-            esquemaVacunatorio.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    // Suponiendo que verLibretaSanitaria sea un JFrame
-                	VerLibretaSanitaria ventanaLibretaSanitaria = new VerLibretaSanitaria();
-                    ventanaLibretaSanitaria.setVisible(true);  // Mostrar la ventana
-                }
-            });
-            // Opción para eliminar la mascota
-            JMenuItem eliminar = new JMenuItem("Eliminar");
-            eliminar.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    int confirm = JOptionPane.showConfirmDialog(null, "¿Deseas borrar a " + mascota.getNombre() + "?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                    if (confirm == JOptionPane.YES_OPTION) {
-                        listaMascotas.remove(mascota);
-                        mascotasMenu.remove(menuMascota);
-                        menuBar.revalidate();
-                        menuBar.repaint();
-                    }
-                }
-            });
+			JMenu libretaSanitaria = new JMenu("Libreta Sanitaria");		// SUBMENU CON OPCIONES
+			JMenuItem esquemaVacunatorio = new JMenuItem("Esquema vacunatorio");
+			JMenuItem registrarVacuna = new JMenuItem("Registrar vacuna");
 
-            // Agregar las opciones al menú de la mascota
-            menuMascota.add(historiaClinica);
-            menuMascota.add(visitas);
-            menuMascota.add(prescripciones);
-            menuMascota.add(libretaSanitaria);
-            menuMascota.add(eliminar);
+			libretaSanitaria.add(esquemaVacunatorio);
+			libretaSanitaria.add(registrarVacuna);
 
-            // Agregar el menú de la mascota al menú principal de "Mascotas"
-            mascotasMenu.add(menuMascota);
-        }
+			libretaSanitaria.add(esquemaVacunatorio);
+			libretaSanitaria.add(registrarVacuna);
 
-        // Refrescar la barra de menú
-        menuBar.revalidate();
-    }
-    
-    public static void main(String[] args) {
-    	
-		ArrayList<AnimalDTO> animales = new ArrayList<>();
-		
-        
-        
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MenuAnimal frame = new MenuAnimal(animales);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
+			// ----------------------------------------------------------------------------------------
+			
+			/*
+			// ABRIR HISTORIA CLINICA
+			historiaClinica.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					HistoriaClinica ventanaHistoriaClinica = new HistoriaClinica(animal, memoryApi);
+					ventanaHistoriaClinica.setVisible(true);
 				}
-			}
-		});
-}
- // aca hay 2 ejemplos, los use para ver si anda el codigo
-    /*
-    listaMascotas.add(new AnimalDTO(
-    	    "Max",               // nombre
-    	    "Perro",             // especie
-    	    "Labrador",          // raza
-    	    "12/05/2018",        // fechaNac
-    	    6,                   // edad
-    	    "25 kg",             // peso
-    	    "Macho",             // sexo
-    	    true,                // estaCastrado
-    	    "Color negro, amigable" // caractParticulares
-    	));
-    listaMascotas.add(new AnimalDTO(
-    	    "Mia",               // nombre
-    	    "Gato",              // especie
-    	    "Siames",            // raza
-    	    "23/08/2020",        // fechaNac
-    	    4,                   // edad
-    	    "4.5 kg",            // peso
-    	    "Hembra",            // sexo
-    	    false,               // estaCastrado
-    	    "Ojos azules, independiente" // caractParticulares
-    	));
-    */
+			});
+
+			// ABRIR LIBRETA SANITARIA
+			esquemaVacunatorio.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					LibretaSanitaria ventanaLibretaSanitaria = new LibretaSanitaria(animal, memoryApi);
+					ventanaLibretaSanitaria.setVisible(true);
+				}
+			});
+			*/
+			// ------------------------------------------------------------------------------------------
+
+			// ELIMINAR UNA MASCOTA
+			JMenuItem eliminar = new JMenuItem("Eliminar");
+			eliminar.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int confirm = JOptionPane.showConfirmDialog(null, "¿Deseas borrar a " + animal.getNombre() + "?",
+							"Confirmar", JOptionPane.YES_NO_OPTION);
+					if (confirm == JOptionPane.YES_OPTION) {
+						listaAnimalesDTO.remove(animal);
+						mascotasMenu.remove(menuAnimal);
+						menuBar.revalidate();
+						menuBar.repaint();
+					}
+				}
+			});
+
+			// AGREGAR TODAS LAS OPCIONES AL MENU DE UNA MASCOTA
+			menuAnimal.add(historiaClinica);
+			menuAnimal.add(visitas);
+			menuAnimal.add(prescripciones);
+			menuAnimal.add(libretaSanitaria);
+			menuAnimal.add(eliminar);
+
+			// AGREGAR EL MENU DE UNA MASCOTA AL MENU GENERAL
+			mascotasMenu.add(menuAnimal);
+		}
+
+		// REFRESCAR LA BARRA DE MENU
+		menuBar.revalidate();
+	}
+
 }

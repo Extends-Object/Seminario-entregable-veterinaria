@@ -11,6 +11,7 @@ import ar.edu.unrn.seminario.api.MemoryApi;
 import ar.edu.unrn.seminario.dto.AnimalDTO;
 import ar.edu.unrn.seminario.dto.EspecieDTO;
 import ar.edu.unrn.seminario.dto.RazaDTO;
+import ar.edu.unrn.seminario.exception.AnimalExistsInArrayException;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -35,7 +36,7 @@ public class RegistroAnimal extends JFrame {
 	private JTextField campoFechaNac;
 	private JTextField campoPeso;
 	private JTextField campoCaractParticulares;
-	private JComboBox<EspecieDTO> comboBoxEspecie;
+	//private JComboBox<EspecieDTO> comboBoxEspecie;
 	private JComboBox<RazaDTO> comboBoxRaza;
 	
 	private IApi memoryApi; // Instancia de MemoryApi
@@ -185,8 +186,13 @@ public class RegistroAnimal extends JFrame {
                 //int edad = calcularEdad(fechaNac);
                 
                 //memoryApi.agregarAnimal(nombre, fechaNac, especie, raza, peso, sexo, caractParticulares, estaCastrado);
-                memoryApi.agregarAnimal(nombre, raza.getTamaño(), raza.getNombre(), LocalDate.parse(fechaNac), Float.parseFloat(peso), sexo, estaCastrado, caractParticulares, 
-                        generarIDUnico());
+                try {
+					memoryApi.agregarAnimal(nombre, raza.getTamaño(), raza.getNombre(), LocalDate.parse(fechaNac), Float.parseFloat(peso), sexo, 
+							estaCastrado, caractParticulares, Integer.parseInt(generarIDUnico()));
+				} catch (NumberFormatException | AnimalExistsInArrayException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
                 
                 
                 // MENSAJE DE CONFIRMACION
@@ -218,13 +224,13 @@ public class RegistroAnimal extends JFrame {
         });
         contentPane.add(btnCancelar);
         
-        //CONFIGURACION DE COMBOBOX------------------------------------------------------------------------------------
+        /*CONFIGURACION DE COMBOBOX------------------------------------------------------------------------------------
         // ESPECIES = Cargamos las especies desde la MemoryApi
         ArrayList <EspecieDTO> listaEspecies = memoryApi.obtenerEspecies();
         for (EspecieDTO especie : listaEspecies) { //"ESPECIES" ES LA LISTA DE ESPECIESDTO QUE SE RECUPERA DE LA API
        		comboBoxEspecie.addItem(especie);
         }
-        
+        */
         JComboBox comboBoxEspecie = new JComboBox();
         comboBoxEspecie.setBounds(165, 103, 116, 21);
         comboBoxEspecie.addActionListener(e -> {		//PARA OBTENER LA ESPECIE SELECCIONADA
