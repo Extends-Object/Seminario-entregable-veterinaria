@@ -69,8 +69,7 @@ public class Inicio extends JFrame {
 		});
 		contentPane.add(Registrar);
 		
-		//-----------------------------------------------------------------------------------
-		//BOTON 2 = MOSTRAR ANIMALES
+
 		JButton MostrarAnimal = new JButton("Mostrar animales");
 		MostrarAnimal.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		MostrarAnimal.setBounds(210, 191, 394, 56);
