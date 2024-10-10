@@ -39,6 +39,8 @@ public class RegistroAnimal extends JFrame {
 	//private JComboBox<EspecieDTO> comboBoxEspecie;
 	private JComboBox<RazaDTO> comboBoxRaza;
 	
+	private int iD = 0;
+	
 	private IApi memoryApi; // Instancia de MemoryApi
 
 	/**
@@ -188,7 +190,7 @@ public class RegistroAnimal extends JFrame {
                 //memoryApi.agregarAnimal(nombre, fechaNac, especie, raza, peso, sexo, caractParticulares, estaCastrado);
                 try {
 					memoryApi.agregarAnimal(nombre, raza.getTamaño(), raza.getNombre(), LocalDate.parse(fechaNac), Float.parseFloat(peso), sexo, 
-							estaCastrado, caractParticulares, Integer.parseInt(generarIDUnico()));
+							estaCastrado, caractParticulares, generarIDUnico());
 				} catch (NumberFormatException | AnimalExistsInArrayException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -252,8 +254,7 @@ public class RegistroAnimal extends JFrame {
 	}
 
 
-	protected String generarIDUnico() {
-		// TODO Auto-generated method stub
-		return null;
+	protected int generarIDUnico() {
+		return iD++;
 	}
 }

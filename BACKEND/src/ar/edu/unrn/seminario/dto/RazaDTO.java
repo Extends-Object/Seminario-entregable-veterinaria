@@ -6,15 +6,15 @@ public class RazaDTO {
     private EspecieDTO especie;
 
     // Constructor
-    public RazaDTO(String nombre, String tamaño, EspecieDTO especie) {
-        this.nombre = nombre;
-        this.tamaño = tamaño;
+    public RazaDTO(String nombre2, String tamaño2, EspecieDTO especie) {
+        this.nombre = nombre2;
+        this.tamaño = tamaño2;
         this.especie = especie;
     }
 
-    public RazaDTO(String nombre2, String tamaño2) {
-        this.nombre = nombre2;
-        this.tamaño = tamaño2;
+    public RazaDTO(String nombre, String tamaño) {
+        this.nombre = nombre;
+        this.tamaño = tamaño;
 	}
 
 	// Getters y Setters
